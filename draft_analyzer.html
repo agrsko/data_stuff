@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fantasy Football Draft Analyzer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f5;
+      color: #111;
+    }
+    header {
+      background: #111;
+      color: #fff;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    main {
+      max-width: 900px;
+      margin: 1.5rem auto 2rem;
+      padding: 0 1rem;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    }
+    h1, h2, h3 {
+      margin-top: 0;
+    }
+    section {
+      padding: 1.5rem 1.5rem 0;
+    }
+    section:last-of-type {
+      padding-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+    input, select, textarea, button {
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    input, select {
+      padding: 0.25rem 0.4rem;
+      margin-top: 0.25rem;
+    }
+    textarea {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      box-sizing: border-box;
+    }
+    button {
+      margin: 1rem 1.5rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      border: 1px solid #111;
+      background: #111;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    .settings-row {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .small {
+      font-size: 0.85rem;
+      color: #555;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.35rem 0.5rem;
+      text-align: left;
+    }
+    th {
+      background: #f0f0f0;
+    }
+    .not-found {
+      color: #b00020;
+      font-size: 0.8rem;
+      margin-left: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1 style="margin:0;font-size:1.3rem;">Fantasy Football Draft Analyzer</h1>
+      <p style="margin:0.2rem 0 0;font-size:0.9rem;opacity:0.85;">
+        Paste your draft. Get grades for every pick.
+      </p>
+    </div>
+    <div>
+      <a href="index.html">&larr; Back to portfolio</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Intro -->
+    <section>
+      <h2>How it works (v1)</h2>
+      <p class="small">
+        This early version uses a simple model: each player has an expected PPR total and an
+        actual PPR total for the season. The tool computes <strong>value = actual / expected</strong>
+        and turns that into a letter grade (A–F).
+      </p>
+    </section>
+
+    <!-- Settings -->
+    <section>
+      <h3>League settings</h3>
+      <div class="settings-row">
+        <label>
+          Number of teams
+          <input type="number" id="numTeams" min="4" max="20" value="12" />
+        </label>
+        <label>
+          Your 1st-round pick (slot)
+          <input type="number" id="firstPick" min="1" max="20" value="1" />
+        </label>
+        <label>
+          Scoring
+          <select id="scoring">
+            <option value="standard">Standard</option>
+            <option value="half">Half PPR</option>
+            <option value="ppr" selected>Full PPR</option>
+          </select>
+        </label>
+      </div>
+      <p class="small">
+        These don’t affect the math yet, but they&apos;ll hook into your ADP- and scoring-based
+        models in later versions.
+      </p>
+    </section>
+
+    <!-- Picks input -->
+    <section>
+      <h3>Draft picks</h3>
+      <p class="small">
+        Paste one pick per line, in this format:<br />
+        <code>1.01,Team 1,Christian McCaffrey</code><br />
+        <code>1.02,Team 2,Ja'Marr Chase</code>
+      </p>
+      <textarea id="picksInput" rows="10" placeholder="1.01,Team 1,Christian McCaffrey
+1.02,Team 2,Ja'Marr Chase
+1.03,Team 3,Amon-Ra St. Brown"></textarea>
+    </section>
+
+    <button id="analyzeBtn">Analyze draft</button>
+
+    <!-- Results -->
+    <section>
+      <h3>Pick grades</h3>
+      <div id="resultsContainer" class="small">
+        <p>No results yet. Paste your draft and click &ldquo;Analyze draft.&rdquo;</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // --- Tiny example player database (add to this as you go) ---
+    const players = [
+      {
+        name: "Christian McCaffrey",
+        position: "RB",
+        expectedPpr: 320,   // expected season PPR
+        actualPpr: 350      // actual season PPR
+      },
+      {
+        name: "Ja'Marr Chase",
+        position: "WR",
+        expectedPpr: 290,
+        actualPpr: 320
+      },
+      {
+        name: "Amon-Ra St. Brown",
+        position: "WR",
+        expectedPpr: 270,
+        actualPpr: 295
+      }
+      // TODO: add more players from your dataset
+    ];
+
+    function findPlayerByName(name) {
+      const clean = name.trim().toLowerCase();
+      return players.find(p => p.name.toLowerCase() === clean) || null;
+    }
+
+    function gradeFromValueScore(v) {
+      if (v >= 1.25) return "A+";
+      if (v >= 1.15) return "A";
+      if (v >= 1.05) return "B";
+      if (v >= 0.95) return "C";
+      if (v >= 0.85) return "D";
+      return "F";
+    }
+
+    function analyzeDraft() {
+      const picksText = document.getElementById("picksInput").value.trim();
+      const resultsContainer = document.getElementById("resultsContainer");
+
+      if (!picksText) {
+        resultsContainer.innerHTML = "<p>Please paste some picks first.</p>";
+        return;
+      }
+
+      const lines = picksText
+        .split("\n")
+        .map(line => line.trim())
+        .filter(line => line.length > 0);
+
+      const rows = lines.map(line => {
+        const parts = line.split(",").map(x => x.trim());
+        const [pickLabel, teamName, playerName] = parts;
+
+        const player = playerName ? findPlayerByName(playerName) : null;
+
+        let expected = null;
+        let actual = null;
+        let valueScore = null;
+        let grade = null;
+
+        if (player) {
+          expected = player.expectedPpr;
+          actual = player.actualPpr;
+
+          if (expected && expected > 0 && actual != null) {
+            valueScore = actual / expected;
+            grade = gradeFromValueScore(valueScore);
+          }
+        }
+
+        return {
+          pickLabel: pickLabel || "",
+          teamName: teamName || "",
+          playerName: playerName || "",
+          playerFound: !!player,
+          expected,
+          actual,
+          valueScore,
+          grade
+        };
+      });
+
+      // Build the HTML table
+      let html = "";
+      html += "<table>";
+      html += "<thead><tr>";
+      html += "<th>Pick</th><th>Team</th><th>Player</th>";
+      html += "<th>Expected PPR</th><th>Actual PPR</th>";
+      html += "<th>Value (Actual / Expected)</th><th>Grade</th>";
+      html += "</tr></thead><tbody>";
+
+      rows.forEach(r => {
+        html += "<tr>";
+        html += `<td>${r.pickLabel}</td>`;
+        html += `<td>${r.teamName}</td>`;
+        html += `<td>${r.playerName}${!r.playerFound ? '<span class="not-found">(not found)</span>' : ""}</td>`;
+        html += `<td>${r.expected != null ? r.expected.toFixed(1) : "—"}</td>`;
+        html += `<td>${r.actual != null ? r.actual.toFixed(1) : "—"}</td>`;
+        html += `<td>${r.valueScore != null ? r.valueScore.toFixed(2) : "—"}</td>`;
+        html += `<td>${r.grade || "—"}</td>`;
+        html += "</tr>";
+      });
+
+      html += "</tbody></table>";
+
+      resultsContainer.innerHTML = html;
+    }
+
+    document.getElementById("analyzeBtn").addEventListener("click", analyzeDraft);
+  </script>
+</body>
+</html>
