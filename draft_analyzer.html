@@ -116,17 +116,16 @@
       <p class="small">
         Step 1: Set your draft settings.<br />
         Step 2: Click <strong>Build picks table</strong> to generate one row per round.<br />
-        Step 3: Type your players in order. The tool uses your pick slot, draft type and
-        number of teams to compute each pick&apos;s overall number. For each player, it pulls
-        season totals/averages and expected totals/averages, then computes:
+        Step 3: Type your players in order. For each player, the tool reads 2024 stats
+        and expected totals/averages, computes:
       </p>
       <ul class="small">
-        <li><strong>ratioTotal</strong> = totalPoints / expectedTotal</li>
-        <li><strong>ratioAvg</strong> = avgPoints / expectedAvg</li>
+        <li><strong>ratioTotal</strong> = Total Points / Expected Total Points</li>
+        <li><strong>ratioAvg</strong> = Average Points / Expected Average Points</li>
         <li><strong>Pick Strength</strong> = ratioAvg^0.75 × ratioTotal^0.25</li>
       </ul>
       <p class="small">
-        Letter grades are based on Pick Strength.
+        Letter grades are based on Pick Strength (you can tune the thresholds later).
       </p>
     </section>
 
@@ -176,7 +175,7 @@
       <h3>Your picks</h3>
       <p class="small">
         After building the picks table, enter the player you drafted in each
-        round. As the player database grows, names will autocomplete while you type.
+        round. Names will autocomplete from the 2024 player list.
       </p>
       <div id="picksTableContainer" class="small">
         <p>No picks yet. Choose your settings and click &ldquo;Build picks table.&rdquo;</p>
@@ -206,12 +205,18 @@
       return fetch("players_2024.json")
         .then(res => res.json())
         .then(data => {
-          // Add computed ratios + pickStrength to each player
-          players = data.map(p => {
-            const totalPoints   = p.totalPoints;
-            const avgPoints     = p.avgPoints;
-            const expectedTotal = p.expectedTotal;
-            const expectedAvg   = p.expectedAvg;
+          // Map your column names (Name, Total Points, etc.) into normalized fields
+          players = data.map(original => {
+            const p = original;
+
+            const name          = p.name || p.Name;
+            const position      = p.position || p.Position;
+            const team          = p.team || p.Team || null;
+            const totalPoints   = p.totalPoints ?? p["Total Points"];
+            const avgPoints     = p.avgPoints ?? p["Average Points"];
+            const expectedTotal = p.expectedTotal ?? p["Expected Total Points"];
+            const expectedAvg   = p.expectedAvg ?? p["Expected Average Points"];
+            const adpOverall    = p.adpOverall ?? p["Overall ADP"] ?? null;
 
             const ratioTotal =
               expectedTotal && expectedTotal > 0 && totalPoints != null
@@ -231,7 +236,15 @@
             }
 
             return {
-              ...p,
+              ...original,      // keep all original fields too
+              name,
+              position,
+              team,
+              adpOverall,
+              totalPoints,
+              avgPoints,
+              expectedTotal,
+              expectedAvg,
               ratioTotal,
               ratioAvg,
               pickStrength
@@ -256,14 +269,12 @@
 
     function findPlayerByName(name) {
       const clean = name.trim().toLowerCase();
-      return players.find(p => p.name.toLowerCase() === clean) || null;
+      return players.find(p => p.name && p.name.toLowerCase() === clean) || null;
     }
 
-    // Grades based on pickStrength (you can tweak thresholds later)
+    // Grades based on pickStrength (you can tune thresholds)
     function gradeFromPickStrength(ps) {
       if (ps == null) return null;
-
-      // assuming 1.0 ~ "expected", >1 good, <1 bad
       if (ps >= 1.25) return "A+";
       if (ps >= 1.15) return "A";
       if (ps >= 1.05) return "B";
@@ -274,18 +285,15 @@
 
     // ---- DRAFT LAYOUT LOGIC ------------------------------------------------
 
-    // Compute pick within round and overall pick
     function computePickInfo(round, numTeams, slot, draftType) {
       let pickInRound;
       if (draftType === "snake") {
-        // Odd rounds: normal order; even rounds: reversed
         if (round % 2 === 1) {
           pickInRound = slot;
         } else {
           pickInRound = numTeams - slot + 1;
         }
       } else {
-        // Linear (non-snake)
         pickInRound = slot;
       }
       const overall = (round - 1) * numTeams + pickInRound;
@@ -343,7 +351,7 @@
       const rows = [];
       inputs.forEach(input => {
         const playerName = input.value.trim();
-        if (!playerName) return; // skip empty rounds
+        if (!playerName) return;
 
         const round = Number(input.dataset.round);
         const overall = Number(input.dataset.overall);
@@ -375,7 +383,6 @@
           round,
           overall,
           pickInRound,
-          teamName: "My Team",
           playerName,
           player,
           expectedTotal,
@@ -394,7 +401,6 @@
         return;
       }
 
-      // Build results table
       let html = "<table>";
       html += "<thead><tr>";
       html += "<th>Round</th><th>Overall</th><th>Pick in round</th>";
@@ -438,4 +444,3 @@
   </script>
 </body>
 </html>
-
