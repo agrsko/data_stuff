@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Aidan Grskovic – Sports Data Projects</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Portfolio of sports analytics projects: MLB schedule strength, fantasy football draft tools, and more."
+  />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f5;
+      color: #111;
+    }
+    header {
+      background: #111;
+      color: #fff;
+      padding: 1rem 1.5rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    header p {
+      margin: 0.25rem 0 0;
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+    main {
+      max-width: 900px;
+      margin: 1.5rem auto 2rem;
+      padding: 0 1rem;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    }
+    section {
+      padding: 1.5rem 1.5rem 0;
+    }
+    section:last-of-type {
+      padding-bottom: 1.5rem;
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+    }
+    .projects {
+      display: grid;
+      gap: 1rem;
+      margin-top: 0.75rem;
+    }
+    .project-card {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+    }
+    .project-card h3 {
+      margin: 0 0 0.25rem;
+      font-size: 1.05rem;
+    }
+    .tags {
+      margin-top: 0.25rem;
+      font-size: 0.8rem;
+    }
+    .tag {
+      display: inline-block;
+      margin-right: 0.4rem;
+      padding: 0.1rem 0.35rem;
+      border-radius: 999px;
+      border: 1px solid #ccc;
+    }
+    .small {
+      font-size: 0.85rem;
+      color: #555;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #777;
+      padding: 0.75rem 0 1.5rem;
+    }
+    a {
+      color: #0070f3;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Aidan Grskovic – Sports Data</h1>
+    <p>Sports analytics, fantasy tools, and schedule-based metrics.</p>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>About</h2>
+      <p class="small">
+        I’m Aidan, an Economics & Statistics grad who builds sports analytics projects:
+        custom strength-of-schedule metrics, fantasy football draft value models, and other
+        data-driven tools. This site is where I collect and explain those projects.
+      </p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects">
+        <article class="project-card">
+          <h3>Fantasy Football Draft Analyzer (Coming Soon)</h3>
+          <p class="small">
+            A web tool where you paste your league’s draft, and it grades every pick based
+            on expected vs. actual points, draft slot value, and positional scarcity.
+          </p>
+          <div class="tags">
+            <span class="tag">Fantasy Football</span>
+            <span class="tag">Portfolio</span>
+            <span class="tag">In Progress</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <h3>MLB “Heat Index” Strength of Schedule</h3>
+          <p class="small">
+            A dynamic Strength of Schedule metric that weights opponents based on how
+            “hot” they were at the time of each matchup (using last-10-game records)
+            instead of season-long averages.
+          </p>
+          <div class="tags">
+            <span class="tag">MLB</span>
+            <span class="tag">Strength of Schedule</span>
+            <span class="tag">Data Viz</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <h3>Fantasy Draft Pick Value Curves</h3>
+          <p class="small">
+            Pick-value curves by draft slot, tailored to your league size and scoring,
+            used to measure how much value each pick added relative to expectations.
+          </p>
+          <div class="tags">
+            <span class="tag">Fantasy</span>
+            <span class="tag">Modeling</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p class="small">
+        Want to talk sports data or see the code behind these projects?<br />
+        Email me at <a href="mailto:youremail@example.com">youremail@example.com</a>
+        or find me on LinkedIn.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> Aidan Grskovic
+  </footer>
+
+  <script>
+    // Set the current year in the footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
