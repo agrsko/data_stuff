@@ -46,7 +46,7 @@
       margin-bottom: 0.5rem;
       font-size: 0.9rem;
     }
-    input, select, textarea, button {
+    input, select, button {
       font-family: inherit;
       font-size: 0.95rem;
     }
@@ -54,14 +54,8 @@
       padding: 0.25rem 0.4rem;
       margin-top: 0.25rem;
     }
-    textarea {
-      width: 100%;
-      margin-top: 0.5rem;
-      padding: 0.5rem;
-      box-sizing: border-box;
-    }
     button {
-      margin: 1rem 1.5rem;
+      margin: 1rem 1.5rem 0;
       padding: 0.4rem 0.8rem;
       border-radius: 4px;
       border: 1px solid #111;
@@ -107,7 +101,7 @@
     <div>
       <h1 style="margin:0;font-size:1.3rem;">Fantasy Football Draft Analyzer</h1>
       <p style="margin:0.2rem 0 0;font-size:0.9rem;opacity:0.85;">
-        Paste your draft. Get grades for every pick.
+        Choose your draft settings, enter your picks, and get grades.
       </p>
     </div>
     <div>
@@ -120,50 +114,66 @@
     <section>
       <h2>How it works (v1)</h2>
       <p class="small">
-        This early version uses the following model: Each pick you make carries an expected total points
-        and points per game based on overall draft slot and historical positional value. The tool 
-        computes <strong>value = actual / expected</strong> and turns that into a letter grade (A–F).
+        Step 1: Set your draft settings.<br />
+        Step 2: Click <strong>Build picks table</strong> to generate one row per round.<br />
+        Step 3: Type your players in order (one per round). The tool uses
+        your pick slot, draft type, and number of teams to calculate each
+        pick&apos;s overall number, then compares each player&apos;s actual season
+        to their expected season to assign a grade.
       </p>
     </section>
 
-    <!-- Settings -->
+    <!-- Draft Settings -->
     <section>
-      <h3>League settings</h3>
+      <h3>Draft Settings</h3>
       <div class="settings-row">
         <label>
           Number of teams
-          <input type="number" id="numTeams" min="4" max="20" value="12" />
+          <select id="numTeams">
+            <option value="6">6</option>
+            <option value="8">8</option>
+            <option value="10">10</option>
+            <option value="12" selected>12</option>
+            <option value="14">14</option>
+          </select>
         </label>
+
         <label>
-          Your 1st-round pick (slot)
-          <input type="number" id="firstPick" min="1" max="20" value="1" />
+          Pick Slot
+          <input type="number" id="pickSlot" min="1" max="14" value="1" />
         </label>
+
         <label>
-          Scoring
-          <select id="scoring">
-            <option value="standard">Standard</option>
-            <option value="half">Half PPR</option>
-            <option value="ppr" selected>Full PPR</option>
+          Number of rounds
+          <input type="number" id="numRounds" min="1" max="25" value="16" />
+        </label>
+
+        <label>
+          Draft type
+          <select id="draftType">
+            <option value="snake" selected>Snake</option>
+            <option value="linear">Non-snake (Linear)</option>
           </select>
         </label>
       </div>
       <p class="small">
-        These don’t affect the math yet, but they&apos;ll hook into your ADP- and scoring-based
-        models in later versions.
+        These settings let the tool compute each pick&apos;s round and overall
+        draft position, so you only have to type in player names.
       </p>
+
+      <button id="buildPicksBtn">Build picks table</button>
     </section>
 
     <!-- Picks input -->
     <section>
-      <h3>Draft picks</h3>
+      <h3>Your picks</h3>
       <p class="small">
-        Paste one pick per line, in this format:<br />
-        <code>1.01,Team 1,Christian McCaffrey</code><br />
-        <code>1.02,Team 2,Ja'Marr Chase</code>
+        After building the picks table, enter the player you drafted in each
+        round. As the player database grows, names will autocomplete while you type.
       </p>
-      <textarea id="picksInput" rows="10" placeholder="1.01,Team 1,Christian McCaffrey
-1.02,Team 2,Ja'Marr Chase
-1.03,Team 3,Amon-Ra St. Brown"></textarea>
+      <div id="picksTableContainer" class="small">
+        <p>No picks yet. Choose your settings and click &ldquo;Build picks table.&rdquo;</p>
+      </div>
     </section>
 
     <button id="analyzeBtn">Analyze draft</button>
@@ -172,40 +182,33 @@
     <section>
       <h3>Pick grades</h3>
       <div id="resultsContainer" class="small">
-        <p>No results yet. Paste your draft and click &ldquo;Analyze draft.&rdquo;</p>
+        <p>No results yet.</p>
       </div>
     </section>
   </main>
 
+  <!-- Autocomplete list for players -->
+  <datalist id="playersList"></datalist>
+
   <script>
-    // --- Tiny example player database (add more as you go) ---
+    // --- Example player database (expand this with your real data) ---
     const players = [
-      {
-        name: "CeeDee Lamb",
-        position: "WR",
-        expectedPpr: 290,
-        actualPpr: 330
-      },
-      {
-        name: "Jonathan Taylor",
-        position: "RB",
-        expectedPpr: 260,
-        actualPpr: 240
-      },
-      {
-        name: "Brock Bowers",
-        position: "TE",
-        expectedPpr: 200,
-        actualPpr: 230
-      },
-      {
-        name: "Tee Higgins",
-        position: "WR",
-        expectedPpr: 210,
-        actualPpr: 190
-      }
-      // TODO: add the rest of your season data here
+      { name: "Christian McCaffrey", position: "RB", expectedPpr: 320, actualPpr: 350 },
+      { name: "CeeDee Lamb", position: "WR", expectedPpr: 290, actualPpr: 330 },
+      { name: "Tyreek Hill", position: "WR", expectedPpr: 300, actualPpr: 310 },
+      { name: "Jonathan Taylor", position: "RB", expectedPpr: 260, actualPpr: 240 },
+      { name: "Brock Bowers", position: "TE", expectedPpr: 200, actualPpr: 230 },
+      { name: "Tee Higgins", position: "WR", expectedPpr: 210, actualPpr: 190 },
+      { name: "Jaylen Waddle", position: "WR", expectedPpr: 230, actualPpr: 220 }
+      // TODO: add the rest of your 202x dataset here
     ];
+
+    function populatePlayerDatalist() {
+      const list = document.getElementById("playersList");
+      list.innerHTML = players
+        .map(p => `<option value="${p.name}"></option>`)
+        .join("");
+    }
 
     function findPlayerByName(name) {
       const clean = name.trim().toLowerCase();
@@ -221,94 +224,80 @@
       return "F";
     }
 
-    // Parse the original "1.01,Team,Player" style if user uses it
-    function parseCsvStyle(lines) {
-      return lines.map(line => {
-        const parts = line.split(",").map(x => x.trim());
-        const [pickLabel, teamName, playerName] = parts;
-        return { pickLabel, teamName, playerName };
-      }).filter(r => r.playerName);
-    }
-
-    // Parse ESPN copy-paste format:
-    // NO.
-    // Player
-    // ROUND
-    // 8
-    // CeeDee Lamb Dal, WR
-    // 1
-    // 13
-    // Jonathan Taylor Ind, RB
-    // 2
-    // ...
-    function parseEspnStyle(lines) {
-      // Remove the 3 header lines: NO., Player, ROUND
-      const dataLines = lines.slice(3);
-      const results = [];
-
-      for (let i = 0; i + 2 < dataLines.length; i += 3) {
-        const overallStr = dataLines[i];
-        const playerLine = dataLines[i + 1];
-        const roundStr = dataLines[i + 2];
-
-        const overallPick = overallStr.trim();
-        const round = roundStr.trim();
-
-        // playerLine looks like "CeeDee Lamb Dal, WR"
-        // We want just "CeeDee Lamb"
-        let cleanName = playerLine.trim();
-        const commaIndex = cleanName.lastIndexOf(",");
-        if (commaIndex !== -1) {
-          const beforeComma = cleanName.slice(0, commaIndex); // "CeeDee Lamb Dal"
-          const parts = beforeComma.split(" ");
-          parts.pop(); // remove team abbrev (Dal)
-          cleanName = parts.join(" "); // "CeeDee Lamb"
+    // Compute pick within round and overall pick
+    function computePickInfo(round, numTeams, slot, draftType) {
+      let pickInRound;
+      if (draftType === "snake") {
+        // Odd rounds: normal order; even rounds: reversed
+        if (round % 2 === 1) {
+          pickInRound = slot;
+        } else {
+          pickInRound = numTeams - slot + 1;
         }
-
-        results.push({
-          pickLabel: overallPick,
-          teamName: "My Team",
-          playerName: cleanName,
-          round: round
-        });
+      } else {
+        // Linear (non-snake)
+        pickInRound = slot;
       }
-
-      return results;
+      const overall = (round - 1) * numTeams + pickInRound;
+      return { pickInRound, overall };
     }
 
-    function analyzeDraft() {
-      const picksText = document.getElementById("picksInput").value.trim();
-      const resultsContainer = document.getElementById("resultsContainer");
+    function buildPicksTable() {
+      const numTeams = Number(document.getElementById("numTeams").value);
+      const slot = Number(document.getElementById("pickSlot").value);
+      const numRounds = Number(document.getElementById("numRounds").value);
+      const draftType = document.getElementById("draftType").value;
+      const container = document.getElementById("picksTableContainer");
 
-      if (!picksText) {
-        resultsContainer.innerHTML = "<p>Please paste some picks first.</p>";
+      if (!numTeams || !slot || !numRounds) {
+        container.innerHTML = "<p>Please enter valid draft settings first.</p>";
         return;
       }
 
-      const lines = picksText
-        .split("\n")
-        .map(line => line.trim())
-        .filter(line => line.length > 0);
+      let html = "<table>";
+      html += "<thead><tr>";
+      html += "<th>Round</th><th>Overall pick</th><th>Pick in round</th><th>Player</th>";
+      html += "</tr></thead><tbody>";
 
-      let parsedRows = [];
-
-      // Detect ESPN format: first three lines look like headers
-      const isEspnFormat =
-        lines.length >= 6 &&
-        lines[0].toUpperCase().startsWith("NO") &&
-        lines[1].toLowerCase() === "player" &&
-        lines[2].toUpperCase().startsWith("ROUND");
-
-      if (isEspnFormat) {
-        parsedRows = parseEspnStyle(lines);
-      } else {
-        parsedRows = parseCsvStyle(lines);
+      for (let r = 1; r <= numRounds; r++) {
+        const { pickInRound, overall } = computePickInfo(r, numTeams, slot, draftType);
+        html += "<tr>";
+        html += `<td>${r}</td>`;
+        html += `<td>${overall}</td>`;
+        html += `<td>${pickInRound}</td>`;
+        html += `<td><input type="text"
+                             class="player-input"
+                             data-round="${r}"
+                             data-overall="${overall}"
+                             data-pick-in-round="${pickInRound}"
+                             list="playersList"
+                             placeholder="Start typing a player name..." /></td>`;
+        html += "</tr>";
       }
 
-      // Now enrich with expected/actual and grades
-      const rowsWithGrades = parsedRows.map(r => {
-        const player = r.playerName ? findPlayerByName(r.playerName) : null;
+      html += "</tbody></table>";
+      container.innerHTML = html;
+    }
 
+    function analyzeDraft() {
+      const inputs = document.querySelectorAll(".player-input");
+      const resultsContainer = document.getElementById("resultsContainer");
+
+      if (!inputs.length) {
+        resultsContainer.innerHTML = "<p>Build the picks table and enter players first.</p>";
+        return;
+      }
+
+      const rows = [];
+      inputs.forEach(input => {
+        const playerName = input.value.trim();
+        if (!playerName) return; // skip empty rounds
+
+        const round = Number(input.dataset.round);
+        const overall = Number(input.dataset.overall);
+        const pickInRound = Number(input.dataset["pickInRound"]);
+
+        const player = findPlayerByName(playerName);
         let expected = null;
         let actual = null;
         let valueScore = null;
@@ -317,41 +306,45 @@
         if (player) {
           expected = player.expectedPpr;
           actual = player.actualPpr;
-
           if (expected && expected > 0 && actual != null) {
             valueScore = actual / expected;
             grade = gradeFromValueScore(valueScore);
           }
         }
 
-        return {
-          pickLabel: r.pickLabel || "",
-          teamName: r.teamName || "",
-          playerName: r.playerName || "",
+        rows.push({
+          round,
+          overall,
+          pickInRound,
+          teamName: "My Team",
+          playerName,
           playerFound: !!player,
           expected,
           actual,
           valueScore,
-          grade,
-          round: r.round || ""
-        };
+          grade
+        });
       });
 
-      // Build the HTML table
-      let html = "";
-      html += "<table>";
+      if (!rows.length) {
+        resultsContainer.innerHTML = "<p>No players entered yet.</p>";
+        return;
+      }
+
+      // Build results table
+      let html = "<table>";
       html += "<thead><tr>";
-      html += "<th>Pick</th><th>Round</th><th>Team</th><th>Player</th>";
-      html += "<th>Expected PPR</th><th>Actual PPR</th>";
+      html += "<th>Round</th><th>Overall</th><th>Pick in round</th>";
+      html += "<th>Player</th><th>Expected PPR</th><th>Actual PPR</th>";
       html += "<th>Value (Actual / Expected)</th><th>Grade</th>";
       html += "</tr></thead><tbody>";
 
-      rowsWithGrades.forEach(r => {
+      rows.forEach(r => {
         html += "<tr>";
-        html += `<td>${r.pickLabel}</td>`;
         html += `<td>${r.round}</td>`;
-        html += `<td>${r.teamName}</td>`;
-        html += `<td>${r.playerName}${!r.playerFound ? '<span class="not-found">(not found)</span>' : ""}</td>`;
+        html += `<td>${r.overall}</td>`;
+        html += `<td>${r.pickInRound}</td>`;
+        html += `<td>${r.playerName}${!r.playerFound ? '<span class="not-found"> (not found)</span>' : ""}</td>`;
         html += `<td>${r.expected != null ? r.expected.toFixed(1) : "—"}</td>`;
         html += `<td>${r.actual != null ? r.actual.toFixed(1) : "—"}</td>`;
         html += `<td>${r.valueScore != null ? r.valueScore.toFixed(2) : "—"}</td>`;
@@ -360,12 +353,13 @@
       });
 
       html += "</tbody></table>";
-
       resultsContainer.innerHTML = html;
     }
 
+    // Wire up buttons and datalist on load
+    document.getElementById("buildPicksBtn").addEventListener("click", buildPicksTable);
     document.getElementById("analyzeBtn").addEventListener("click", analyzeDraft);
+    populatePlayerDatalist();
   </script>
-
 </body>
 </html>
