@@ -120,9 +120,9 @@
     <section>
       <h2>How it works (v1)</h2>
       <p class="small">
-        This early version uses a simple model: each player has an expected PPR total and an
-        actual PPR total for the season. The tool computes <strong>value = actual / expected</strong>
-        and turns that into a letter grade (A–F).
+        This early version uses the following model: Each pick you make carries an expected total points
+        and points per game based on overall draft slot and historical positional value. The tool 
+        computes <strong>value = actual / expected</strong> and turns that into a letter grade (A–F).
       </p>
     </section>
 
@@ -178,27 +178,33 @@
   </main>
 
   <script>
-    // --- Tiny example player database (add to this as you go) ---
+    // --- Tiny example player database (add more as you go) ---
     const players = [
       {
-        name: "Christian McCaffrey",
-        position: "RB",
-        expectedPpr: 320,   // expected season PPR
-        actualPpr: 350      // actual season PPR
-      },
-      {
-        name: "Ja'Marr Chase",
+        name: "CeeDee Lamb",
         position: "WR",
         expectedPpr: 290,
-        actualPpr: 320
+        actualPpr: 330
       },
       {
-        name: "Amon-Ra St. Brown",
+        name: "Jonathan Taylor",
+        position: "RB",
+        expectedPpr: 260,
+        actualPpr: 240
+      },
+      {
+        name: "Brock Bowers",
+        position: "TE",
+        expectedPpr: 200,
+        actualPpr: 230
+      },
+      {
+        name: "Tee Higgins",
         position: "WR",
-        expectedPpr: 270,
-        actualPpr: 295
+        expectedPpr: 210,
+        actualPpr: 190
       }
-      // TODO: add more players from your dataset
+      // TODO: add the rest of your season data here
     ];
 
     function findPlayerByName(name) {
@@ -215,6 +221,61 @@
       return "F";
     }
 
+    // Parse the original "1.01,Team,Player" style if user uses it
+    function parseCsvStyle(lines) {
+      return lines.map(line => {
+        const parts = line.split(",").map(x => x.trim());
+        const [pickLabel, teamName, playerName] = parts;
+        return { pickLabel, teamName, playerName };
+      }).filter(r => r.playerName);
+    }
+
+    // Parse ESPN copy-paste format:
+    // NO.
+    // Player
+    // ROUND
+    // 8
+    // CeeDee Lamb Dal, WR
+    // 1
+    // 13
+    // Jonathan Taylor Ind, RB
+    // 2
+    // ...
+    function parseEspnStyle(lines) {
+      // Remove the 3 header lines: NO., Player, ROUND
+      const dataLines = lines.slice(3);
+      const results = [];
+
+      for (let i = 0; i + 2 < dataLines.length; i += 3) {
+        const overallStr = dataLines[i];
+        const playerLine = dataLines[i + 1];
+        const roundStr = dataLines[i + 2];
+
+        const overallPick = overallStr.trim();
+        const round = roundStr.trim();
+
+        // playerLine looks like "CeeDee Lamb Dal, WR"
+        // We want just "CeeDee Lamb"
+        let cleanName = playerLine.trim();
+        const commaIndex = cleanName.lastIndexOf(",");
+        if (commaIndex !== -1) {
+          const beforeComma = cleanName.slice(0, commaIndex); // "CeeDee Lamb Dal"
+          const parts = beforeComma.split(" ");
+          parts.pop(); // remove team abbrev (Dal)
+          cleanName = parts.join(" "); // "CeeDee Lamb"
+        }
+
+        results.push({
+          pickLabel: overallPick,
+          teamName: "My Team",
+          playerName: cleanName,
+          round: round
+        });
+      }
+
+      return results;
+    }
+
     function analyzeDraft() {
       const picksText = document.getElementById("picksInput").value.trim();
       const resultsContainer = document.getElementById("resultsContainer");
@@ -229,11 +290,24 @@
         .map(line => line.trim())
         .filter(line => line.length > 0);
 
-      const rows = lines.map(line => {
-        const parts = line.split(",").map(x => x.trim());
-        const [pickLabel, teamName, playerName] = parts;
+      let parsedRows = [];
 
-        const player = playerName ? findPlayerByName(playerName) : null;
+      // Detect ESPN format: first three lines look like headers
+      const isEspnFormat =
+        lines.length >= 6 &&
+        lines[0].toUpperCase().startsWith("NO") &&
+        lines[1].toLowerCase() === "player" &&
+        lines[2].toUpperCase().startsWith("ROUND");
+
+      if (isEspnFormat) {
+        parsedRows = parseEspnStyle(lines);
+      } else {
+        parsedRows = parseCsvStyle(lines);
+      }
+
+      // Now enrich with expected/actual and grades
+      const rowsWithGrades = parsedRows.map(r => {
+        const player = r.playerName ? findPlayerByName(r.playerName) : null;
 
         let expected = null;
         let actual = null;
@@ -251,14 +325,15 @@
         }
 
         return {
-          pickLabel: pickLabel || "",
-          teamName: teamName || "",
-          playerName: playerName || "",
+          pickLabel: r.pickLabel || "",
+          teamName: r.teamName || "",
+          playerName: r.playerName || "",
           playerFound: !!player,
           expected,
           actual,
           valueScore,
-          grade
+          grade,
+          round: r.round || ""
         };
       });
 
@@ -266,14 +341,15 @@
       let html = "";
       html += "<table>";
       html += "<thead><tr>";
-      html += "<th>Pick</th><th>Team</th><th>Player</th>";
+      html += "<th>Pick</th><th>Round</th><th>Team</th><th>Player</th>";
       html += "<th>Expected PPR</th><th>Actual PPR</th>";
       html += "<th>Value (Actual / Expected)</th><th>Grade</th>";
       html += "</tr></thead><tbody>";
 
-      rows.forEach(r => {
+      rowsWithGrades.forEach(r => {
         html += "<tr>";
         html += `<td>${r.pickLabel}</td>`;
+        html += `<td>${r.round}</td>`;
         html += `<td>${r.teamName}</td>`;
         html += `<td>${r.playerName}${!r.playerFound ? '<span class="not-found">(not found)</span>' : ""}</td>`;
         html += `<td>${r.expected != null ? r.expected.toFixed(1) : "—"}</td>`;
@@ -290,5 +366,6 @@
 
     document.getElementById("analyzeBtn").addEventListener("click", analyzeDraft);
   </script>
+
 </body>
 </html>
