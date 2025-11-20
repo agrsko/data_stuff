@@ -314,7 +314,7 @@
 
       let html = "<table>";
       html += "<thead><tr>";
-      html += "<th>Round</th><th>Overall pick</th><th>Pick in round</th><th>Player</th>";
+      html += "<th>Round</th><th>Overall Pick</th><th>Player</th>";
       html += "</tr></thead><tbody>";
 
       for (let r = 1; r <= numRounds; r++) {
@@ -322,7 +322,6 @@
         html += "<tr>";
         html += `<td>${r}</td>`;
         html += `<td>${overall}</td>`;
-        html += `<td>${pickInRound}</td>`;
         html += `<td><input type="text"
                              class="player-input"
                              data-round="${r}"
@@ -403,7 +402,7 @@
 
       let html = "<table>";
       html += "<thead><tr>";
-      html += "<th>Round</th><th>Overall</th><th>Pick in round</th>";
+      html += "<th>Round</th><th>Overall</th>";
       html += "<th>Player</th><th>Pos</th>";
       html += "<th>Total</th><th>Avg</th>";
       html += "<th>Exp Total</th><th>Exp Avg</th>";
@@ -416,13 +415,12 @@
         html += "<tr>";
         html += `<td>${r.round}</td>`;
         html += `<td>${r.overall}</td>`;
-        html += `<td>${r.pickInRound}</td>`;
         html += `<td>${r.playerName}${!r.player ? '<span class="not-found"> (not found)</span>' : ""}</td>`;
         html += `<td>${pos}</td>`;
         html += `<td>${r.actualTotal != null ? r.actualTotal.toFixed(1) : "—"}</td>`;
-        html += `<td>${r.actualAvg != null ? r.actualAvg.toFixed(2) : "—"}</td>`;
+        html += `<td>${r.actualAvg != null ? r.actualAvg.toFixed(1) : "—"}</td>`;
         html += `<td>${r.expectedTotal != null ? r.expectedTotal.toFixed(1) : "—"}</td>`;
-        html += `<td>${r.expectedAvg != null ? r.expectedAvg.toFixed(2) : "—"}</td>`;
+        html += `<td>${r.expectedAvg != null ? r.expectedAvg.toFixed(1) : "—"}</td>`;
         html += `<td>${r.ratioTotal != null ? r.ratioTotal.toFixed(3) : "—"}</td>`;
         html += `<td>${r.ratioAvg != null ? r.ratioAvg.toFixed(3) : "—"}</td>`;
         html += `<td>${r.pickStrength != null ? r.pickStrength.toFixed(3) : "—"}</td>`;
