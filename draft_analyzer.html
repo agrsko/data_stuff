@@ -116,9 +116,17 @@
       <p class="small">
         Step 1: Set your draft settings.<br />
         Step 2: Click <strong>Build picks table</strong> to generate one row per round.<br />
-        Step 3: Type your players in order. The tool knows your pick slot, draft type and
-        number of teams, so it can compute each pick&apos;s overall number and compare your
-        players to their expected production.
+        Step 3: Type your players in order. The tool uses your pick slot, draft type and
+        number of teams to compute each pick&apos;s overall number. For each player, it pulls
+        season totals/averages and expected totals/averages, then computes:
+      </p>
+      <ul class="small">
+        <li><strong>ratioTotal</strong> = totalPoints / expectedTotal</li>
+        <li><strong>ratioAvg</strong> = avgPoints / expectedAvg</li>
+        <li><strong>Pick Strength</strong> = ratioAvg^0.75 × ratioTotal^0.25</li>
+      </ul>
+      <p class="small">
+        Letter grades are based on Pick Strength.
       </p>
     </section>
 
@@ -198,7 +206,38 @@
       return fetch("players_2024.json")
         .then(res => res.json())
         .then(data => {
-          players = data;
+          // Add computed ratios + pickStrength to each player
+          players = data.map(p => {
+            const totalPoints   = p.totalPoints;
+            const avgPoints     = p.avgPoints;
+            const expectedTotal = p.expectedTotal;
+            const expectedAvg   = p.expectedAvg;
+
+            const ratioTotal =
+              expectedTotal && expectedTotal > 0 && totalPoints != null
+                ? totalPoints / expectedTotal
+                : null;
+
+            const ratioAvg =
+              expectedAvg && expectedAvg > 0 && avgPoints != null
+                ? avgPoints / expectedAvg
+                : null;
+
+            let pickStrength = null;
+            if (ratioTotal != null && ratioAvg != null) {
+              // PickStrength = ratioAvg^0.75 * ratioTotal^0.25
+              pickStrength =
+                Math.pow(ratioAvg, 0.75) * Math.pow(ratioTotal, 0.25);
+            }
+
+            return {
+              ...p,
+              ratioTotal,
+              ratioAvg,
+              pickStrength
+            };
+          });
+
           populatePlayerDatalist();
           console.log("Loaded players:", players.length);
         })
@@ -220,13 +259,16 @@
       return players.find(p => p.name.toLowerCase() === clean) || null;
     }
 
-    // Simple grading function; you can swap this out for your real pick-strength logic
-    function gradeFromValueScore(v) {
-      if (v >= 1.25) return "A+";
-      if (v >= 1.15) return "A";
-      if (v >= 1.05) return "B";
-      if (v >= 0.95) return "C";
-      if (v >= 0.85) return "D";
+    // Grades based on pickStrength (you can tweak thresholds later)
+    function gradeFromPickStrength(ps) {
+      if (ps == null) return null;
+
+      // assuming 1.0 ~ "expected", >1 good, <1 bad
+      if (ps >= 1.25) return "A+";
+      if (ps >= 1.15) return "A";
+      if (ps >= 1.05) return "B";
+      if (ps >= 0.95) return "C";
+      if (ps >= 0.85) return "D";
       return "F";
     }
 
@@ -310,41 +352,23 @@
         const player = findPlayerByName(playerName);
 
         let expectedTotal = null;
-        let expectedAvg = null;
-        let actualTotal = null;
-        let actualAvg = null;
-        let valueScore = null;
-        let grade = null;
-        let pickStrength = null;
+        let expectedAvg   = null;
+        let actualTotal   = null;
+        let actualAvg     = null;
+        let ratioTotal    = null;
+        let ratioAvg      = null;
+        let pickStrength  = null;
+        let grade         = null;
 
         if (player) {
-          // These field names assume players_2024.json has them.
-          // Example player object shape:
-          // {
-          //   "name": "...",
-          //   "position": "WR",
-          //   "team": "DAL",
-          //   "gamesPlayed": 17,
-          //   "totalPoints": 330.4,
-          //   "avgPoints": 19.4,
-          //   "expectedTotal": 285.0,
-          //   "expectedAvg": 16.8,
-          //   "pickStrength": 92
-          // }
           expectedTotal = player.expectedTotal;
           expectedAvg   = player.expectedAvg;
           actualTotal   = player.totalPoints;
           actualAvg     = player.avgPoints;
-
-          // simple value metric for now – you can swap to your real model
-          if (expectedTotal && expectedTotal > 0 && actualTotal != null) {
-            valueScore = actualTotal / expectedTotal;
-            grade = gradeFromValueScore(valueScore);
-          }
-
-          if (player.pickStrength != null) {
-            pickStrength = player.pickStrength;
-          }
+          ratioTotal    = player.ratioTotal;
+          ratioAvg      = player.ratioAvg;
+          pickStrength  = player.pickStrength;
+          grade         = gradeFromPickStrength(pickStrength);
         }
 
         rows.push({
@@ -358,9 +382,10 @@
           expectedAvg,
           actualTotal,
           actualAvg,
-          valueScore,
-          grade,
-          pickStrength
+          ratioTotal,
+          ratioAvg,
+          pickStrength,
+          grade
         });
       });
 
@@ -376,7 +401,7 @@
       html += "<th>Player</th><th>Pos</th>";
       html += "<th>Total</th><th>Avg</th>";
       html += "<th>Exp Total</th><th>Exp Avg</th>";
-      html += "<th>Value (Act / Exp)</th>";
+      html += "<th>ratioTotal</th><th>ratioAvg</th>";
       html += "<th>Pick Strength</th><th>Grade</th>";
       html += "</tr></thead><tbody>";
 
@@ -392,8 +417,9 @@
         html += `<td>${r.actualAvg != null ? r.actualAvg.toFixed(2) : "—"}</td>`;
         html += `<td>${r.expectedTotal != null ? r.expectedTotal.toFixed(1) : "—"}</td>`;
         html += `<td>${r.expectedAvg != null ? r.expectedAvg.toFixed(2) : "—"}</td>`;
-        html += `<td>${r.valueScore != null ? r.valueScore.toFixed(2) : "—"}</td>`;
-        html += `<td>${r.pickStrength != null ? r.pickStrength.toFixed(1) : "—"}</td>`;
+        html += `<td>${r.ratioTotal != null ? r.ratioTotal.toFixed(3) : "—"}</td>`;
+        html += `<td>${r.ratioAvg != null ? r.ratioAvg.toFixed(3) : "—"}</td>`;
+        html += `<td>${r.pickStrength != null ? r.pickStrength.toFixed(3) : "—"}</td>`;
         html += `<td>${r.grade || "—"}</td>`;
         html += "</tr>";
       });
@@ -412,3 +438,4 @@
   </script>
 </body>
 </html>
+
