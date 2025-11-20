@@ -1,28 +1,1772 @@
 [
   {
-    "name": "Christian McCaffrey",
-    "position": "RB",
-    "team": "SF",
-    "gamesPlayed": 4,
-    "totalPoints": 47.8,
-    "avgPoints": 12.0,
-    "adpOverall": 1.4,
-    "adpRound": 1,
-    "expectedTotal": 245.88,
-    "expectedAvg": 18.10,
-    
+    "Name": "Josh Allen",
+    "Position": "QB",
+    "Positional Rank": 1,
+    "Overall ADP": 25.1,
+    "Total Points": 379.04,
+    "Average Points": 22.3,
+    "Expected Total Points": 343.01,
+    "Expected Average Points": 22.05
   },
   {
-    "name": "CeeDee Lamb",
-    "position": "WR",
-    "team": "DAL",
-    "gamesPlayed": 15,
-    "totalPoints": 263.4,
-    "avgPoints": 17.6,
-    "adpOverall": 3.7,
-    "adpRound": 1,
-    "expectedTotal": 264.86,
-    "expectedAvg": 19.22,
-    
+    "Name": "Patrick Mahomes",
+    "Position": "QB",
+    "Positional Rank": 2,
+    "Overall ADP": 30.8,
+    "Total Points": 283.02,
+    "Average Points": 17.7,
+    "Expected Total Points": 331.76,
+    "Expected Average Points": 21.5
+  },
+  {
+    "Name": "Jalen Hurts",
+    "Position": "QB",
+    "Positional Rank": 3,
+    "Overall ADP": 37.3,
+    "Total Points": 315.12,
+    "Average Points": 21,
+    "Expected Total Points": 319.47,
+    "Expected Average Points": 20.89
+  },
+  {
+    "Name": "Lamar Jackson",
+    "Position": "QB",
+    "Positional Rank": 4,
+    "Overall ADP": 44.2,
+    "Total Points": 430.38,
+    "Average Points": 25.3,
+    "Expected Total Points": 307.07,
+    "Expected Average Points": 20.28
+  },
+  {
+    "Name": "C.J. Stroud",
+    "Position": "QB",
+    "Positional Rank": 5,
+    "Overall ADP": 49.9,
+    "Total Points": 220.38,
+    "Average Points": 13,
+    "Expected Total Points": 297.31,
+    "Expected Average Points": 19.8
+  },
+  {
+    "Name": "Anthony Richardson Sr.",
+    "Position": "QB",
+    "Positional Rank": 6,
+    "Overall ADP": 55.2,
+    "Total Points": 163.36,
+    "Average Points": 14.9,
+    "Expected Total Points": 288.64,
+    "Expected Average Points": 19.37
+  },
+  {
+    "Name": "Joe Burrow",
+    "Position": "QB",
+    "Positional Rank": 7,
+    "Overall ADP": 59.7,
+    "Total Points": 372.82,
+    "Average Points": 21.9,
+    "Expected Total Points": 281.58,
+    "Expected Average Points": 19.02
+  },
+  {
+    "Name": "Dak Prescott",
+    "Position": "QB",
+    "Positional Rank": 8,
+    "Overall ADP": 69.8,
+    "Total Points": 116.52,
+    "Average Points": 14.6,
+    "Expected Total Points": 266.75,
+    "Expected Average Points": 18.28
+  },
+  {
+    "Name": "Jordan Love",
+    "Position": "QB",
+    "Positional Rank": 9,
+    "Overall ADP": 73.2,
+    "Total Points": 233.86,
+    "Average Points": 15.6,
+    "Expected Total Points": 262.07,
+    "Expected Average Points": 18.05
+  },
+  {
+    "Name": "Kyler Murray",
+    "Position": "QB",
+    "Positional Rank": 10,
+    "Overall ADP": 76.1,
+    "Total Points": 297.24,
+    "Average Points": 17.5,
+    "Expected Total Points": 258.21,
+    "Expected Average Points": 17.85
+  },
+  {
+    "Name": "Tua Tagovailoa",
+    "Position": "QB",
+    "Positional Rank": 11,
+    "Overall ADP": 88.6,
+    "Total Points": 181.58,
+    "Average Points": 16.5,
+    "Expected Total Points": 242.87,
+    "Expected Average Points": 17.07
+  },
+  {
+    "Name": "Jared Goff",
+    "Position": "QB",
+    "Positional Rank": 12,
+    "Overall ADP": 94.3,
+    "Total Points": 324.46,
+    "Average Points": 19.1,
+    "Expected Total Points": 236.59,
+    "Expected Average Points": 16.75
+  },
+  {
+    "Name": "Jayden Daniels",
+    "Position": "QB",
+    "Positional Rank": 13,
+    "Overall ADP": 99.2,
+    "Total Points": 355.82,
+    "Average Points": 20.9,
+    "Expected Total Points": 231.55,
+    "Expected Average Points": 16.49
+  },
+  {
+    "Name": "Brock Purdy",
+    "Position": "QB",
+    "Positional Rank": 14,
+    "Overall ADP": 105.7,
+    "Total Points": 266.86,
+    "Average Points": 17.8,
+    "Expected Total Points": 225.37,
+    "Expected Average Points": 16.16
+  },
+  {
+    "Name": "Justin Herbert",
+    "Position": "QB",
+    "Positional Rank": 15,
+    "Overall ADP": 114.6,
+    "Total Points": 285.4,
+    "Average Points": 16.8,
+    "Expected Total Points": 217.84,
+    "Expected Average Points": 15.76
+  },
+  {
+    "Name": "Caleb Williams",
+    "Position": "QB",
+    "Positional Rank": 16,
+    "Overall ADP": 116.7,
+    "Total Points": 254.54,
+    "Average Points": 15,
+    "Expected Total Points": 216.23,
+    "Expected Average Points": 15.67
+  },
+  {
+    "Name": "Matthew Stafford",
+    "Position": "QB",
+    "Positional Rank": 17,
+    "Overall ADP": 123.1,
+    "Total Points": 214.58,
+    "Average Points": 13.4,
+    "Expected Total Points": 211.67,
+    "Expected Average Points": 15.43
+  },
+  {
+    "Name": "Trevor Lawrence",
+    "Position": "QB",
+    "Positional Rank": 18,
+    "Overall ADP": 126.7,
+    "Total Points": 145.2,
+    "Average Points": 14.5,
+    "Expected Total Points": 209.36,
+    "Expected Average Points": 15.3
+  },
+  {
+    "Name": "Kirk Cousins",
+    "Position": "QB",
+    "Positional Rank": 19,
+    "Overall ADP": 130.1,
+    "Total Points": 176.32,
+    "Average Points": 12.6,
+    "Expected Total Points": 207.34,
+    "Expected Average Points": 15.18
+  },
+  {
+    "Name": "Aaron Rodgers",
+    "Position": "QB",
+    "Positional Rank": 20,
+    "Overall ADP": 130.4,
+    "Total Points": 256.58,
+    "Average Points": 15.1,
+    "Expected Total Points": 207.17,
+    "Expected Average Points": 15.17
+  },
+  {
+    "Name": "Justin Fields",
+    "Position": "QB",
+    "Positional Rank": 21,
+    "Overall ADP": 134.7,
+    "Total Points": 119.14,
+    "Average Points": 11.9,
+    "Expected Total Points": 204.86,
+    "Expected Average Points": 15.04
+  },
+  {
+    "Name": "Deshaun Watson",
+    "Position": "QB",
+    "Positional Rank": 22,
+    "Overall ADP": 149.3,
+    "Total Points": 76.72,
+    "Average Points": 11,
+    "Expected Total Points": 198.9,
+    "Expected Average Points": 14.67
+  },
+  {
+    "Name": "Baker Mayfield",
+    "Position": "QB",
+    "Positional Rank": 23,
+    "Overall ADP": 156,
+    "Total Points": 365.8,
+    "Average Points": 21.5,
+    "Expected Total Points": 197.14,
+    "Expected Average Points": 14.55
+  },
+  {
+    "Name": "Geno Smith",
+    "Position": "QB",
+    "Positional Rank": 24,
+    "Overall ADP": 159.8,
+    "Total Points": 266,
+    "Average Points": 15.6,
+    "Expected Total Points": 196.42,
+    "Expected Average Points": 14.49
+  },
+  {
+    "Name": "Will Levis",
+    "Position": "QB",
+    "Positional Rank": 25,
+    "Overall ADP": 160,
+    "Total Points": 119.94,
+    "Average Points": 10,
+    "Expected Total Points": 196.39,
+    "Expected Average Points": 14.49
+  },
+  {
+    "Name": "Bo Nix",
+    "Position": "QB",
+    "Positional Rank": 26,
+    "Overall ADP": 177.5,
+    "Total Points": 317.2,
+    "Average Points": 18.7,
+    "Expected Total Points": 195.68,
+    "Expected Average Points": 14.34
+  },
+  {
+    "Name": "Christian McCaffrey",
+    "Position": "RB",
+    "Positional Rank": 1,
+    "Overall ADP": 1.4,
+    "Total Points": 47.8,
+    "Average Points": 12,
+    "Expected Total Points": 244.99,
+    "Expected Average Points": 18.03
+  },
+  {
+    "Name": "Breece Hall",
+    "Position": "RB",
+    "Positional Rank": 2,
+    "Overall ADP": 2.2,
+    "Total Points": 240.9,
+    "Average Points": 15.1,
+    "Expected Total Points": 243.23,
+    "Expected Average Points": 17.9
+  },
+  {
+    "Name": "Bijan Robinson",
+    "Position": "RB",
+    "Positional Rank": 3,
+    "Overall ADP": 4.9,
+    "Total Points": 341.7,
+    "Average Points": 20.1,
+    "Expected Total Points": 237.36,
+    "Expected Average Points": 17.44
+  },
+  {
+    "Name": "Jahmyr Gibbs",
+    "Position": "RB",
+    "Positional Rank": 4,
+    "Overall ADP": 9.4,
+    "Total Points": 362.9,
+    "Average Points": 21.3,
+    "Expected Total Points": 227.95,
+    "Expected Average Points": 16.71
+  },
+  {
+    "Name": "Jonathan Taylor",
+    "Position": "RB",
+    "Positional Rank": 5,
+    "Overall ADP": 9.8,
+    "Total Points": 244.7,
+    "Average Points": 17.5,
+    "Expected Total Points": 227.13,
+    "Expected Average Points": 16.65
+  },
+  {
+    "Name": "Saquon Barkley",
+    "Position": "RB",
+    "Positional Rank": 6,
+    "Overall ADP": 11.3,
+    "Total Points": 355.3,
+    "Average Points": 22.2,
+    "Expected Total Points": 224.11,
+    "Expected Average Points": 16.42
+  },
+  {
+    "Name": "Kyren Williams",
+    "Position": "RB",
+    "Positional Rank": 7,
+    "Overall ADP": 15.9,
+    "Total Points": 272.1,
+    "Average Points": 17,
+    "Expected Total Points": 215.11,
+    "Expected Average Points": 15.72
+  },
+  {
+    "Name": "Derrick Henry",
+    "Position": "RB",
+    "Positional Rank": 8,
+    "Overall ADP": 15.9,
+    "Total Points": 336.4,
+    "Average Points": 19.8,
+    "Expected Total Points": 215.11,
+    "Expected Average Points": 15.72
+  },
+  {
+    "Name": "Travis Etienne Jr.",
+    "Position": "RB",
+    "Positional Rank": 9,
+    "Overall ADP": 17.6,
+    "Total Points": 130.2,
+    "Average Points": 8.7,
+    "Expected Total Points": 211.9,
+    "Expected Average Points": 15.48
+  },
+  {
+    "Name": "Isiah Pacheco",
+    "Position": "RB",
+    "Positional Rank": 10,
+    "Overall ADP": 19.8,
+    "Total Points": 56.9,
+    "Average Points": 8.1,
+    "Expected Total Points": 207.83,
+    "Expected Average Points": 15.16
+  },
+  {
+    "Name": "De'Von Achane",
+    "Position": "RB",
+    "Positional Rank": 11,
+    "Overall ADP": 21.4,
+    "Total Points": 299.9,
+    "Average Points": 17.6,
+    "Expected Total Points": 204.93,
+    "Expected Average Points": 14.94
+  },
+  {
+    "Name": "Josh Jacobs",
+    "Position": "RB",
+    "Positional Rank": 12,
+    "Overall ADP": 23.6,
+    "Total Points": 293.1,
+    "Average Points": 17.2,
+    "Expected Total Points": 201.03,
+    "Expected Average Points": 14.64
+  },
+  {
+    "Name": "Rachaad White",
+    "Position": "RB",
+    "Positional Rank": 13,
+    "Overall ADP": 29,
+    "Total Points": 199.6,
+    "Average Points": 12.5,
+    "Expected Total Points": 191.85,
+    "Expected Average Points": 13.95
+  },
+  {
+    "Name": "James Cook",
+    "Position": "RB",
+    "Positional Rank": 14,
+    "Overall ADP": 30.3,
+    "Total Points": 266.7,
+    "Average Points": 16.7,
+    "Expected Total Points": 189.73,
+    "Expected Average Points": 13.78
+  },
+  {
+    "Name": "Alvin Kamara",
+    "Position": "RB",
+    "Positional Rank": 15,
+    "Overall ADP": 32.3,
+    "Total Points": 265.3,
+    "Average Points": 19,
+    "Expected Total Points": 186.52,
+    "Expected Average Points": 13.54
+  },
+  {
+    "Name": "Joe Mixon",
+    "Position": "RB",
+    "Positional Rank": 16,
+    "Overall ADP": 35,
+    "Total Points": 240.5,
+    "Average Points": 17.2,
+    "Expected Total Points": 182.31,
+    "Expected Average Points": 13.22
+  },
+  {
+    "Name": "Kenneth Walker III",
+    "Position": "RB",
+    "Positional Rank": 17,
+    "Overall ADP": 35.6,
+    "Total Points": 181.2,
+    "Average Points": 15.1,
+    "Expected Total Points": 181.39,
+    "Expected Average Points": 13.15
+  },
+  {
+    "Name": "Aaron Jones Sr.",
+    "Position": "RB",
+    "Positional Rank": 18,
+    "Overall ADP": 46,
+    "Total Points": 241.6,
+    "Average Points": 14.2,
+    "Expected Total Points": 166.5,
+    "Expected Average Points": 12.03
+  },
+  {
+    "Name": "James Conner",
+    "Position": "RB",
+    "Positional Rank": 19,
+    "Overall ADP": 47.6,
+    "Total Points": 253.8,
+    "Average Points": 15.9,
+    "Expected Total Points": 164.37,
+    "Expected Average Points": 11.88
+  },
+  {
+    "Name": "David Montgomery",
+    "Position": "RB",
+    "Positional Rank": 20,
+    "Overall ADP": 54.6,
+    "Total Points": 221.72,
+    "Average Points": 15.8,
+    "Expected Total Points": 155.58,
+    "Expected Average Points": 11.22
+  },
+  {
+    "Name": "D'Andre Swift",
+    "Position": "RB",
+    "Positional Rank": 21,
+    "Overall ADP": 56.5,
+    "Total Points": 214.5,
+    "Average Points": 12.6,
+    "Expected Total Points": 153.33,
+    "Expected Average Points": 11.05
+  },
+  {
+    "Name": "Rhamondre Stevenson",
+    "Position": "RB",
+    "Positional Rank": 22,
+    "Overall ADP": 62,
+    "Total Points": 175.9,
+    "Average Points": 11.7,
+    "Expected Total Points": 147.13,
+    "Expected Average Points": 10.6
+  },
+  {
+    "Name": "Raheem Mostert",
+    "Position": "RB",
+    "Positional Rank": 23,
+    "Overall ADP": 64.1,
+    "Total Points": 70.9,
+    "Average Points": 5.5,
+    "Expected Total Points": 144.88,
+    "Expected Average Points": 10.43
+  },
+  {
+    "Name": "Nick Chubb",
+    "Position": "RB",
+    "Positional Rank": 24,
+    "Overall ADP": 65,
+    "Total Points": 63.3,
+    "Average Points": 7.9,
+    "Expected Total Points": 143.94,
+    "Expected Average Points": 10.36
+  },
+  {
+    "Name": "Najee Harris",
+    "Position": "RB",
+    "Positional Rank": 25,
+    "Overall ADP": 67.1,
+    "Total Points": 204.6,
+    "Average Points": 12,
+    "Expected Total Points": 141.78,
+    "Expected Average Points": 10.2
+  },
+  {
+    "Name": "Zamir White",
+    "Position": "RB",
+    "Positional Rank": 26,
+    "Overall ADP": 67.8,
+    "Total Points": 29.3,
+    "Average Points": 3.7,
+    "Expected Total Points": 141.08,
+    "Expected Average Points": 10.15
+  },
+  {
+    "Name": "Zack Moss",
+    "Position": "RB",
+    "Positional Rank": 27,
+    "Overall ADP": 74.4,
+    "Total Points": 81.9,
+    "Average Points": 10.2,
+    "Expected Total Points": 134.79,
+    "Expected Average Points": 9.69
+  },
+  {
+    "Name": "Javonte Williams",
+    "Position": "RB",
+    "Positional Rank": 28,
+    "Overall ADP": 77.5,
+    "Total Points": 157.9,
+    "Average Points": 9.3,
+    "Expected Total Points": 132.04,
+    "Expected Average Points": 9.49
+  },
+  {
+    "Name": "Jaylen Warren",
+    "Position": "RB",
+    "Positional Rank": 29,
+    "Overall ADP": 79.6,
+    "Total Points": 124.1,
+    "Average Points": 8.3,
+    "Expected Total Points": 130.25,
+    "Expected Average Points": 9.36
+  },
+  {
+    "Name": "Tony Pollard",
+    "Position": "RB",
+    "Positional Rank": 30,
+    "Overall ADP": 81.7,
+    "Total Points": 200.7,
+    "Average Points": 12.5,
+    "Expected Total Points": 128.51,
+    "Expected Average Points": 9.24
+  },
+  {
+    "Name": "Jonathon Brooks",
+    "Position": "RB",
+    "Positional Rank": 31,
+    "Overall ADP": 85.4,
+    "Total Points": 7.5,
+    "Average Points": 2.5,
+    "Expected Total Points": 125.59,
+    "Expected Average Points": 9.03
+  },
+  {
+    "Name": "Devin Singletary",
+    "Position": "RB",
+    "Positional Rank": 32,
+    "Overall ADP": 87.9,
+    "Total Points": 96.6,
+    "Average Points": 6.4,
+    "Expected Total Points": 123.71,
+    "Expected Average Points": 8.89
+  },
+  {
+    "Name": "Austin Ekeler",
+    "Position": "RB",
+    "Positional Rank": 33,
+    "Overall ADP": 88,
+    "Total Points": 132.3,
+    "Average Points": 11,
+    "Expected Total Points": 123.64,
+    "Expected Average Points": 8.89
+  },
+  {
+    "Name": "Tyjae Spears",
+    "Position": "RB",
+    "Positional Rank": 34,
+    "Overall ADP": 91.4,
+    "Total Points": 113.6,
+    "Average Points": 9.5,
+    "Expected Total Points": 121.21,
+    "Expected Average Points": 8.71
+  },
+  {
+    "Name": "Chase Brown",
+    "Position": "RB",
+    "Positional Rank": 35,
+    "Overall ADP": 91.9,
+    "Total Points": 255,
+    "Average Points": 15.9,
+    "Expected Total Points": 120.86,
+    "Expected Average Points": 8.69
+  },
+  {
+    "Name": "Ezekiel Elliott",
+    "Position": "RB",
+    "Positional Rank": 36,
+    "Overall ADP": 96.2,
+    "Total Points": 57.5,
+    "Average Points": 3.8,
+    "Expected Total Points": 118,
+    "Expected Average Points": 8.49
+  },
+  {
+    "Name": "Brian Robinson Jr.",
+    "Position": "RB",
+    "Positional Rank": 37,
+    "Overall ADP": 97.9,
+    "Total Points": 159.8,
+    "Average Points": 11.4,
+    "Expected Total Points": 116.92,
+    "Expected Average Points": 8.41
+  },
+  {
+    "Name": "Jerome Ford",
+    "Position": "RB",
+    "Positional Rank": 38,
+    "Overall ADP": 98.5,
+    "Total Points": 134,
+    "Average Points": 9.6,
+    "Expected Total Points": 116.55,
+    "Expected Average Points": 8.38
+  },
+  {
+    "Name": "Gus Edwards",
+    "Position": "RB",
+    "Positional Rank": 39,
+    "Overall ADP": 100.6,
+    "Total Points": 64.1,
+    "Average Points": 5.8,
+    "Expected Total Points": 115.28,
+    "Expected Average Points": 8.29
+  },
+  {
+    "Name": "Trey Benson",
+    "Position": "RB",
+    "Positional Rank": 40,
+    "Overall ADP": 108.5,
+    "Total Points": 47,
+    "Average Points": 3.6,
+    "Expected Total Points": 110.89,
+    "Expected Average Points": 7.98
+  },
+  {
+    "Name": "Chuba Hubbard",
+    "Position": "RB",
+    "Positional Rank": 41,
+    "Overall ADP": 108.8,
+    "Total Points": 241.6,
+    "Average Points": 16.1,
+    "Expected Total Points": 110.74,
+    "Expected Average Points": 7.97
+  },
+  {
+    "Name": "Blake Corum",
+    "Position": "RB",
+    "Positional Rank": 42,
+    "Overall ADP": 110.3,
+    "Total Points": 33.5,
+    "Average Points": 2,
+    "Expected Total Points": 109.98,
+    "Expected Average Points": 7.92
+  },
+  {
+    "Name": "J.K. Dobbins",
+    "Position": "RB",
+    "Positional Rank": 43,
+    "Overall ADP": 116.2,
+    "Total Points": 191.8,
+    "Average Points": 14.8,
+    "Expected Total Points": 107.19,
+    "Expected Average Points": 7.72
+  },
+  {
+    "Name": "Rico Dowdle",
+    "Position": "RB",
+    "Positional Rank": 44,
+    "Overall ADP": 118.9,
+    "Total Points": 197.8,
+    "Average Points": 12.4,
+    "Expected Total Points": 106.01,
+    "Expected Average Points": 7.63
+  },
+  {
+    "Name": "Tyler Allgeier",
+    "Position": "RB",
+    "Positional Rank": 45,
+    "Overall ADP": 125.1,
+    "Total Points": 106.2,
+    "Average Points": 6.2,
+    "Expected Total Points": 103.52,
+    "Expected Average Points": 7.46
+  },
+  {
+    "Name": "Jaleel McLaughlin",
+    "Position": "RB",
+    "Positional Rank": 46,
+    "Overall ADP": 126.6,
+    "Total Points": 97.2,
+    "Average Points": 6.1,
+    "Expected Total Points": 102.97,
+    "Expected Average Points": 7.42
+  },
+  {
+    "Name": "Elijah Mitchell",
+    "Position": "RB",
+    "Positional Rank": 47,
+    "Overall ADP": 129.8,
+    "Total Points": 0,
+    "Average Points": 0,
+    "Expected Total Points": 101.83,
+    "Expected Average Points": 7.33
+  },
+  {
+    "Name": "Ty Chandler",
+    "Position": "RB",
+    "Positional Rank": 48,
+    "Overall ADP": 130.3,
+    "Total Points": 28.4,
+    "Average Points": 1.7,
+    "Expected Total Points": 101.66,
+    "Expected Average Points": 7.32
+  },
+  {
+    "Name": "Zach Charbonnet",
+    "Position": "RB",
+    "Positional Rank": 49,
+    "Overall ADP": 130.7,
+    "Total Points": 186.9,
+    "Average Points": 11,
+    "Expected Total Points": 101.52,
+    "Expected Average Points": 7.31
+  },
+  {
+    "Name": "Khalil Herbert",
+    "Position": "RB",
+    "Positional Rank": 50,
+    "Overall ADP": 136.4,
+    "Total Points": 31.5,
+    "Average Points": 2.3,
+    "Expected Total Points": 99.71,
+    "Expected Average Points": 7.18
+  },
+  {
+    "Name": "Kimani Vidal",
+    "Position": "RB",
+    "Positional Rank": 51,
+    "Overall ADP": 143.9,
+    "Total Points": 32.7,
+    "Average Points": 3.3,
+    "Expected Total Points": 97.61,
+    "Expected Average Points": 7.02
+  },
+  {
+    "Name": "Ray Davis",
+    "Position": "RB",
+    "Positional Rank": 52,
+    "Overall ADP": 147.7,
+    "Total Points": 116.1,
+    "Average Points": 6.8,
+    "Expected Total Points": 96.66,
+    "Expected Average Points": 6.95
+  },
+  {
+    "Name": "Jordan Mason",
+    "Position": "RB",
+    "Positional Rank": 53,
+    "Overall ADP": 149.1,
+    "Total Points": 115,
+    "Average Points": 9.6,
+    "Expected Total Points": 96.33,
+    "Expected Average Points": 6.92
+  },
+  {
+    "Name": "Dameon Pierce",
+    "Position": "RB",
+    "Positional Rank": 54,
+    "Overall ADP": 151.4,
+    "Total Points": 43.5,
+    "Average Points": 4,
+    "Expected Total Points": 95.8,
+    "Expected Average Points": 6.88
+  },
+  {
+    "Name": "Bucky Irving",
+    "Position": "RB",
+    "Positional Rank": 55,
+    "Overall ADP": 152.9,
+    "Total Points": 244.4,
+    "Average Points": 14.4,
+    "Expected Total Points": 95.47,
+    "Expected Average Points": 6.85
+  },
+  {
+    "Name": "Jaylen Wright",
+    "Position": "RB",
+    "Positional Rank": 56,
+    "Overall ADP": 156.6,
+    "Total Points": 26.7,
+    "Average Points": 1.8,
+    "Expected Total Points": 94.69,
+    "Expected Average Points": 6.79
+  },
+  {
+    "Name": "Antonio Gibson",
+    "Position": "RB",
+    "Positional Rank": 57,
+    "Overall ADP": 158.6,
+    "Total Points": 103.4,
+    "Average Points": 6.1,
+    "Expected Total Points": 94.29,
+    "Expected Average Points": 6.75
+  },
+  {
+    "Name": "MarShawn Lloyd",
+    "Position": "RB",
+    "Positional Rank": 58,
+    "Overall ADP": 159.1,
+    "Total Points": 2.8,
+    "Average Points": 2.8,
+    "Expected Total Points": 94.2,
+    "Expected Average Points": 6.74
+  },
+  {
+    "Name": "Alexander Mattison",
+    "Position": "RB",
+    "Positional Rank": 59,
+    "Overall ADP": 160.7,
+    "Total Points": 137.4,
+    "Average Points": 9.8,
+    "Expected Total Points": 93.89,
+    "Expected Average Points": 6.72
+  },
+  {
+    "Name": "Tyrone Tracy Jr.",
+    "Position": "RB",
+    "Positional Rank": 60,
+    "Overall ADP": 174,
+    "Total Points": 182.3,
+    "Average Points": 10.7,
+    "Expected Total Points": 91.59,
+    "Expected Average Points": 6.49
+  },
+  {
+    "Name": "Tyreek Hill",
+    "Position": "WR",
+    "Positional Rank": 1,
+    "Overall ADP": 2.6,
+    "Total Points": 218.2,
+    "Average Points": 12.8,
+    "Expected Total Points": 263.87,
+    "Expected Average Points": 19.11
+  },
+  {
+    "Name": "CeeDee Lamb",
+    "Position": "WR",
+    "Positional Rank": 2,
+    "Overall ADP": 3.7,
+    "Total Points": 263.4,
+    "Average Points": 17.6,
+    "Expected Total Points": 262.07,
+    "Expected Average Points": 18.91
+  },
+  {
+    "Name": "Amon-Ra St. Brown",
+    "Position": "WR",
+    "Positional Rank": 3,
+    "Overall ADP": 6.2,
+    "Total Points": 316.18,
+    "Average Points": 18.6,
+    "Expected Total Points": 258.01,
+    "Expected Average Points": 18.47
+  },
+  {
+    "Name": "Ja'Marr Chase",
+    "Position": "WR",
+    "Positional Rank": 4,
+    "Overall ADP": 7.2,
+    "Total Points": 403,
+    "Average Points": 23.7,
+    "Expected Total Points": 256.41,
+    "Expected Average Points": 18.29
+  },
+  {
+    "Name": "Justin Jefferson",
+    "Position": "WR",
+    "Positional Rank": 5,
+    "Overall ADP": 8,
+    "Total Points": 317.48,
+    "Average Points": 18.7,
+    "Expected Total Points": 255.12,
+    "Expected Average Points": 18.16
+  },
+  {
+    "Name": "A.J. Brown",
+    "Position": "WR",
+    "Positional Rank": 6,
+    "Overall ADP": 10.9,
+    "Total Points": 216.9,
+    "Average Points": 16.7,
+    "Expected Total Points": 250.53,
+    "Expected Average Points": 17.68
+  },
+  {
+    "Name": "Garrett Wilson",
+    "Position": "WR",
+    "Positional Rank": 7,
+    "Overall ADP": 12.1,
+    "Total Points": 251.9,
+    "Average Points": 14.8,
+    "Expected Total Points": 248.65,
+    "Expected Average Points": 17.49
+  },
+  {
+    "Name": "Marvin Harrison Jr.",
+    "Position": "WR",
+    "Positional Rank": 8,
+    "Overall ADP": 14.5,
+    "Total Points": 196.5,
+    "Average Points": 11.6,
+    "Expected Total Points": 244.92,
+    "Expected Average Points": 17.12
+  },
+  {
+    "Name": "Puka Nacua",
+    "Position": "WR",
+    "Positional Rank": 9,
+    "Overall ADP": 15.2,
+    "Total Points": 206.6,
+    "Average Points": 18.8,
+    "Expected Total Points": 243.84,
+    "Expected Average Points": 17.01
+  },
+  {
+    "Name": "Davante Adams",
+    "Position": "WR",
+    "Positional Rank": 10,
+    "Overall ADP": 20,
+    "Total Points": 241.3,
+    "Average Points": 17.2,
+    "Expected Total Points": 236.56,
+    "Expected Average Points": 16.32
+  },
+  {
+    "Name": "Drake London",
+    "Position": "WR",
+    "Positional Rank": 11,
+    "Overall ADP": 21.5,
+    "Total Points": 280.8,
+    "Average Points": 16.5,
+    "Expected Total Points": 234.33,
+    "Expected Average Points": 16.12
+  },
+  {
+    "Name": "Deebo Samuel Sr.",
+    "Position": "WR",
+    "Positional Rank": 12,
+    "Overall ADP": 23,
+    "Total Points": 153.6,
+    "Average Points": 10.2,
+    "Expected Total Points": 232.11,
+    "Expected Average Points": 15.92
+  },
+  {
+    "Name": "Chris Olave",
+    "Position": "WR",
+    "Positional Rank": 13,
+    "Overall ADP": 26.2,
+    "Total Points": 76.7,
+    "Average Points": 9.6,
+    "Expected Total Points": 227.45,
+    "Expected Average Points": 15.52
+  },
+  {
+    "Name": "Jaylen Waddle",
+    "Position": "WR",
+    "Positional Rank": 14,
+    "Overall ADP": 29.1,
+    "Total Points": 149.6,
+    "Average Points": 10,
+    "Expected Total Points": 223.3,
+    "Expected Average Points": 15.17
+  },
+  {
+    "Name": "Nico Collins",
+    "Position": "WR",
+    "Positional Rank": 15,
+    "Overall ADP": 32.1,
+    "Total Points": 210.6,
+    "Average Points": 17.6,
+    "Expected Total Points": 219.08,
+    "Expected Average Points": 14.83
+  },
+  {
+    "Name": "Mike Evans",
+    "Position": "WR",
+    "Positional Rank": 16,
+    "Overall ADP": 33.5,
+    "Total Points": 240.4,
+    "Average Points": 17.2,
+    "Expected Total Points": 217.13,
+    "Expected Average Points": 14.68
+  },
+  {
+    "Name": "Cooper Kupp",
+    "Position": "WR",
+    "Positional Rank": 17,
+    "Overall ADP": 37,
+    "Total Points": 175,
+    "Average Points": 14.6,
+    "Expected Total Points": 212.35,
+    "Expected Average Points": 14.32
+  },
+  {
+    "Name": "DeVonta Smith",
+    "Position": "WR",
+    "Positional Rank": 18,
+    "Overall ADP": 38.3,
+    "Total Points": 199.4,
+    "Average Points": 15.3,
+    "Expected Total Points": 210.6,
+    "Expected Average Points": 14.19
+  },
+  {
+    "Name": "Malik Nabers",
+    "Position": "WR",
+    "Positional Rank": 19,
+    "Overall ADP": 38.3,
+    "Total Points": 273.6,
+    "Average Points": 18.2,
+    "Expected Total Points": 210.6,
+    "Expected Average Points": 14.19
+  },
+  {
+    "Name": "DK Metcalf",
+    "Position": "WR",
+    "Positional Rank": 20,
+    "Overall ADP": 40.7,
+    "Total Points": 191.2,
+    "Average Points": 12.7,
+    "Expected Total Points": 207.4,
+    "Expected Average Points": 13.96
+  },
+  {
+    "Name": "Stefon Diggs",
+    "Position": "WR",
+    "Positional Rank": 21,
+    "Overall ADP": 41.8,
+    "Total Points": 121.92,
+    "Average Points": 15.2,
+    "Expected Total Points": 205.95,
+    "Expected Average Points": 13.86
+  },
+  {
+    "Name": "DJ Moore",
+    "Position": "WR",
+    "Positional Rank": 22,
+    "Overall ADP": 43.7,
+    "Total Points": 238.1,
+    "Average Points": 14,
+    "Expected Total Points": 203.48,
+    "Expected Average Points": 13.69
+  },
+  {
+    "Name": "Michael Pittman Jr.",
+    "Position": "WR",
+    "Positional Rank": 23,
+    "Overall ADP": 45.2,
+    "Total Points": 165.8,
+    "Average Points": 10.4,
+    "Expected Total Points": 201.54,
+    "Expected Average Points": 13.56
+  },
+  {
+    "Name": "Brandon Aiyuk",
+    "Position": "WR",
+    "Positional Rank": 24,
+    "Overall ADP": 48.1,
+    "Total Points": 62.4,
+    "Average Points": 8.9,
+    "Expected Total Points": 197.86,
+    "Expected Average Points": 13.31
+  },
+  {
+    "Name": "Amari Cooper",
+    "Position": "WR",
+    "Positional Rank": 25,
+    "Overall ADP": 49.2,
+    "Total Points": 122.7,
+    "Average Points": 8.8,
+    "Expected Total Points": 196.48,
+    "Expected Average Points": 13.23
+  },
+  {
+    "Name": "Tee Higgins",
+    "Position": "WR",
+    "Positional Rank": 26,
+    "Overall ADP": 51.8,
+    "Total Points": 222.1,
+    "Average Points": 18.5,
+    "Expected Total Points": 193.26,
+    "Expected Average Points": 13.03
+  },
+  {
+    "Name": "Christian Kirk",
+    "Position": "WR",
+    "Positional Rank": 27,
+    "Overall ADP": 55.6,
+    "Total Points": 70.9,
+    "Average Points": 8.9,
+    "Expected Total Points": 188.65,
+    "Expected Average Points": 12.75
+  },
+  {
+    "Name": "Zay Flowers",
+    "Position": "WR",
+    "Positional Rank": 28,
+    "Overall ADP": 56.8,
+    "Total Points": 209.5,
+    "Average Points": 12.3,
+    "Expected Total Points": 187.22,
+    "Expected Average Points": 12.67
+  },
+  {
+    "Name": "Tank Dell",
+    "Position": "WR",
+    "Positional Rank": 29,
+    "Overall ADP": 57.5,
+    "Total Points": 140,
+    "Average Points": 10,
+    "Expected Total Points": 186.4,
+    "Expected Average Points": 12.62
+  },
+  {
+    "Name": "George Pickens",
+    "Position": "WR",
+    "Positional Rank": 30,
+    "Overall ADP": 59.8,
+    "Total Points": 164.4,
+    "Average Points": 11.7,
+    "Expected Total Points": 183.71,
+    "Expected Average Points": 12.47
+  },
+  {
+    "Name": "Keenan Allen",
+    "Position": "WR",
+    "Positional Rank": 31,
+    "Overall ADP": 63.5,
+    "Total Points": 184.4,
+    "Average Points": 12.3,
+    "Expected Total Points": 179.47,
+    "Expected Average Points": 12.25
+  },
+  {
+    "Name": "Rashee Rice",
+    "Position": "WR",
+    "Positional Rank": 32,
+    "Overall ADP": 64.2,
+    "Total Points": 64.9,
+    "Average Points": 16.2,
+    "Expected Total Points": 178.68,
+    "Expected Average Points": 12.21
+  },
+  {
+    "Name": "Jayden Reed",
+    "Position": "WR",
+    "Positional Rank": 33,
+    "Overall ADP": 65.1,
+    "Total Points": 197,
+    "Average Points": 11.6,
+    "Expected Total Points": 177.68,
+    "Expected Average Points": 12.15
+  },
+  {
+    "Name": "Chris Godwin",
+    "Position": "WR",
+    "Positional Rank": 34,
+    "Overall ADP": 68.4,
+    "Total Points": 137.8,
+    "Average Points": 19.7,
+    "Expected Total Points": 174.04,
+    "Expected Average Points": 11.97
+  },
+  {
+    "Name": "Terry McLaurin",
+    "Position": "WR",
+    "Positional Rank": 35,
+    "Overall ADP": 70.2,
+    "Total Points": 267.8,
+    "Average Points": 15.8,
+    "Expected Total Points": 172.1,
+    "Expected Average Points": 11.88
+  },
+  {
+    "Name": "Calvin Ridley",
+    "Position": "WR",
+    "Positional Rank": 36,
+    "Overall ADP": 74.7,
+    "Total Points": 199.2,
+    "Average Points": 11.7,
+    "Expected Total Points": 167.36,
+    "Expected Average Points": 11.65
+  },
+  {
+    "Name": "Xavier Worthy",
+    "Position": "WR",
+    "Positional Rank": 37,
+    "Overall ADP": 81.9,
+    "Total Points": 187.2,
+    "Average Points": 11,
+    "Expected Total Points": 160.13,
+    "Expected Average Points": 11.33
+  },
+  {
+    "Name": "Marquise Brown",
+    "Position": "WR",
+    "Positional Rank": 38,
+    "Overall ADP": 82.2,
+    "Total Points": 18.1,
+    "Average Points": 9.1,
+    "Expected Total Points": 159.84,
+    "Expected Average Points": 11.31
+  },
+  {
+    "Name": "Christian Watson",
+    "Position": "WR",
+    "Positional Rank": 39,
+    "Overall ADP": 84.2,
+    "Total Points": 105.3,
+    "Average Points": 7,
+    "Expected Total Points": 157.92,
+    "Expected Average Points": 11.23
+  },
+  {
+    "Name": "Keon Coleman",
+    "Position": "WR",
+    "Positional Rank": 40,
+    "Overall ADP": 88.1,
+    "Total Points": 111.5,
+    "Average Points": 8.6,
+    "Expected Total Points": 154.26,
+    "Expected Average Points": 11.07
+  },
+  {
+    "Name": "Jaxon Smith-Njigba",
+    "Position": "WR",
+    "Positional Rank": 41,
+    "Overall ADP": 90.5,
+    "Total Points": 253,
+    "Average Points": 14.9,
+    "Expected Total Points": 152.07,
+    "Expected Average Points": 10.98
+  },
+  {
+    "Name": "Diontae Johnson",
+    "Position": "WR",
+    "Positional Rank": 42,
+    "Overall ADP": 92.1,
+    "Total Points": 89.1,
+    "Average Points": 7.4,
+    "Expected Total Points": 150.64,
+    "Expected Average Points": 10.92
+  },
+  {
+    "Name": "Rome Odunze",
+    "Position": "WR",
+    "Positional Rank": 43,
+    "Overall ADP": 97.7,
+    "Total Points": 144.9,
+    "Average Points": 8.5,
+    "Expected Total Points": 145.81,
+    "Expected Average Points": 10.71
+  },
+  {
+    "Name": "Ladd McConkey",
+    "Position": "WR",
+    "Positional Rank": 44,
+    "Overall ADP": 98.4,
+    "Total Points": 240.9,
+    "Average Points": 15.1,
+    "Expected Total Points": 145.22,
+    "Expected Average Points": 10.69
+  },
+  {
+    "Name": "Romeo Doubs",
+    "Position": "WR",
+    "Positional Rank": 45,
+    "Overall ADP": 103,
+    "Total Points": 132.1,
+    "Average Points": 10.2,
+    "Expected Total Points": 141.47,
+    "Expected Average Points": 10.52
+  },
+  {
+    "Name": "DeAndre Hopkins",
+    "Position": "WR",
+    "Positional Rank": 46,
+    "Overall ADP": 104.5,
+    "Total Points": 147,
+    "Average Points": 9.2,
+    "Expected Total Points": 140.29,
+    "Expected Average Points": 10.47
+  },
+  {
+    "Name": "Tyler Lockett",
+    "Position": "WR",
+    "Positional Rank": 47,
+    "Overall ADP": 106.6,
+    "Total Points": 121,
+    "Average Points": 7.1,
+    "Expected Total Points": 138.67,
+    "Expected Average Points": 10.39
+  },
+  {
+    "Name": "Jameson Williams",
+    "Position": "WR",
+    "Positional Rank": 48,
+    "Overall ADP": 107.8,
+    "Total Points": 212.2,
+    "Average Points": 14.1,
+    "Expected Total Points": 137.76,
+    "Expected Average Points": 10.35
+  },
+  {
+    "Name": "Courtland Sutton",
+    "Position": "WR",
+    "Positional Rank": 49,
+    "Overall ADP": 110.8,
+    "Total Points": 240.3,
+    "Average Points": 14.1,
+    "Expected Total Points": 135.53,
+    "Expected Average Points": 10.24
+  },
+  {
+    "Name": "Brian Thomas Jr.",
+    "Position": "WR",
+    "Positional Rank": 50,
+    "Overall ADP": 114.2,
+    "Total Points": 284,
+    "Average Points": 16.7,
+    "Expected Total Points": 133.1,
+    "Expected Average Points": 10.12
+  },
+  {
+    "Name": "Mike Williams",
+    "Position": "WR",
+    "Positional Rank": 51,
+    "Overall ADP": 116.1,
+    "Total Points": 56.8,
+    "Average Points": 3.2,
+    "Expected Total Points": 131.78,
+    "Expected Average Points": 10.04
+  },
+  {
+    "Name": "Khalil Shakir",
+    "Position": "WR",
+    "Positional Rank": 52,
+    "Overall ADP": 117.4,
+    "Total Points": 182.5,
+    "Average Points": 12.2,
+    "Expected Total Points": 130.9,
+    "Expected Average Points": 9.99
+  },
+  {
+    "Name": "Curtis Samuel",
+    "Position": "WR",
+    "Positional Rank": 53,
+    "Overall ADP": 122.6,
+    "Total Points": 63.7,
+    "Average Points": 4.6,
+    "Expected Total Points": 127.51,
+    "Expected Average Points": 9.79
+  },
+  {
+    "Name": "Joshua Palmer",
+    "Position": "WR",
+    "Positional Rank": 54,
+    "Overall ADP": 130.5,
+    "Total Points": 107.4,
+    "Average Points": 7.2,
+    "Expected Total Points": 122.8,
+    "Expected Average Points": 9.45
+  },
+  {
+    "Name": "Jakobi Meyers",
+    "Position": "WR",
+    "Positional Rank": 55,
+    "Overall ADP": 131.7,
+    "Total Points": 218,
+    "Average Points": 14.5,
+    "Expected Total Points": 122.13,
+    "Expected Average Points": 9.39
+  },
+  {
+    "Name": "Jerry Jeudy",
+    "Position": "WR",
+    "Positional Rank": 56,
+    "Overall ADP": 132.9,
+    "Total Points": 240.9,
+    "Average Points": 14.2,
+    "Expected Total Points": 121.47,
+    "Expected Average Points": 9.33
+  },
+  {
+    "Name": "Jordan Addison",
+    "Position": "WR",
+    "Positional Rank": 57,
+    "Overall ADP": 134.1,
+    "Total Points": 212.5,
+    "Average Points": 14.2,
+    "Expected Total Points": 120.83,
+    "Expected Average Points": 9.27
+  },
+  {
+    "Name": "Brandin Cooks",
+    "Position": "WR",
+    "Positional Rank": 58,
+    "Overall ADP": 135.1,
+    "Total Points": 69.6,
+    "Average Points": 7,
+    "Expected Total Points": 120.3,
+    "Expected Average Points": 9.23
+  },
+  {
+    "Name": "Rashid Shaheed",
+    "Position": "WR",
+    "Positional Rank": 59,
+    "Overall ADP": 139.8,
+    "Total Points": 79.8,
+    "Average Points": 11.4,
+    "Expected Total Points": 117.93,
+    "Expected Average Points": 8.98
+  },
+  {
+    "Name": "Xavier Legette",
+    "Position": "WR",
+    "Positional Rank": 60,
+    "Overall ADP": 141.3,
+    "Total Points": 125.1,
+    "Average Points": 7.8,
+    "Expected Total Points": 117.21,
+    "Expected Average Points": 8.9
+  },
+  {
+    "Name": "Jahan Dotson",
+    "Position": "WR",
+    "Positional Rank": 61,
+    "Overall ADP": 152,
+    "Total Points": 41.9,
+    "Average Points": 2.5,
+    "Expected Total Points": 112.65,
+    "Expected Average Points": 8.23
+  },
+  {
+    "Name": "Quentin Johnston",
+    "Position": "WR",
+    "Positional Rank": 62,
+    "Overall ADP": 152.2,
+    "Total Points": 174.7,
+    "Average Points": 11.6,
+    "Expected Total Points": 112.57,
+    "Expected Average Points": 8.21
+  },
+  {
+    "Name": "Josh Downs",
+    "Position": "WR",
+    "Positional Rank": 63,
+    "Overall ADP": 155.9,
+    "Total Points": 183.5,
+    "Average Points": 13.1,
+    "Expected Total Points": 111.23,
+    "Expected Average Points": 7.94
+  },
+  {
+    "Name": "Adam Thielen",
+    "Position": "WR",
+    "Positional Rank": 64,
+    "Overall ADP": 159,
+    "Total Points": 139.5,
+    "Average Points": 14,
+    "Expected Total Points": 110.19,
+    "Expected Average Points": 7.7
+  },
+  {
+    "Name": "Dontayvion Wicks",
+    "Position": "WR",
+    "Positional Rank": 65,
+    "Overall ADP": 160,
+    "Total Points": 110.5,
+    "Average Points": 6.5,
+    "Expected Total Points": 109.87,
+    "Expected Average Points": 7.62
+  },
+  {
+    "Name": "Adonai Mitchell",
+    "Position": "WR",
+    "Positional Rank": 66,
+    "Overall ADP": 160.9,
+    "Total Points": 53.76,
+    "Average Points": 3.2,
+    "Expected Total Points": 109.59,
+    "Expected Average Points": 7.55
+  },
+  {
+    "Name": "Darnell Mooney",
+    "Position": "WR",
+    "Positional Rank": 67,
+    "Overall ADP": 161.8,
+    "Total Points": 193.2,
+    "Average Points": 12.1,
+    "Expected Total Points": 109.32,
+    "Expected Average Points": 7.47
+  },
+  {
+    "Name": "Ricky Pearsall",
+    "Position": "WR",
+    "Positional Rank": 68,
+    "Overall ADP": 162.7,
+    "Total Points": 93.5,
+    "Average Points": 8.5,
+    "Expected Total Points": 109.05,
+    "Expected Average Points": 7.4
+  },
+  {
+    "Name": "Ja'Lynn Polk",
+    "Position": "WR",
+    "Positional Rank": 69,
+    "Overall ADP": 163.4,
+    "Total Points": 32.7,
+    "Average Points": 2.2,
+    "Expected Total Points": 108.85,
+    "Expected Average Points": 7.34
+  },
+  {
+    "Name": "Rashod Bateman",
+    "Position": "WR",
+    "Positional Rank": 70,
+    "Overall ADP": 169.6,
+    "Total Points": 174.6,
+    "Average Points": 10.3,
+    "Expected Total Points": 107.25,
+    "Expected Average Points": 6.76
+  },
+  {
+    "Name": "Gabe Davis",
+    "Position": "WR",
+    "Positional Rank": 71,
+    "Overall ADP": 169.6,
+    "Total Points": 53.9,
+    "Average Points": 5.4,
+    "Expected Total Points": 107.25,
+    "Expected Average Points": 6.76
+  },
+  {
+    "Name": "Michael Wilson",
+    "Position": "WR",
+    "Positional Rank": 72,
+    "Overall ADP": 170.2,
+    "Total Points": 124.5,
+    "Average Points": 7.8,
+    "Expected Total Points": 107.11,
+    "Expected Average Points": 6.7
+  },
+  {
+    "Name": "Travis Kelce",
+    "Position": "TE",
+    "Positional Rank": 1,
+    "Overall ADP": 24.4,
+    "Total Points": 195.4,
+    "Average Points": 12.2,
+    "Expected Total Points": 201.95,
+    "Expected Average Points": 14.06
+  },
+  {
+    "Name": "Sam LaPorta",
+    "Position": "TE",
+    "Positional Rank": 2,
+    "Overall ADP": 29.4,
+    "Total Points": 174.6,
+    "Average Points": 10.9,
+    "Expected Total Points": 194.93,
+    "Expected Average Points": 13.64
+  },
+  {
+    "Name": "Mark Andrews",
+    "Position": "TE",
+    "Positional Rank": 3,
+    "Overall ADP": 41.2,
+    "Total Points": 188.8,
+    "Average Points": 11.1,
+    "Expected Total Points": 179.84,
+    "Expected Average Points": 12.69
+  },
+  {
+    "Name": "Trey McBride",
+    "Position": "TE",
+    "Positional Rank": 4,
+    "Overall ADP": 50.4,
+    "Total Points": 249.8,
+    "Average Points": 15.6,
+    "Expected Total Points": 169.45,
+    "Expected Average Points": 12.01
+  },
+  {
+    "Name": "Dalton Kincaid",
+    "Position": "TE",
+    "Positional Rank": 5,
+    "Overall ADP": 59.1,
+    "Total Points": 100.8,
+    "Average Points": 7.8,
+    "Expected Total Points": 160.67,
+    "Expected Average Points": 11.42
+  },
+  {
+    "Name": "George Kittle",
+    "Position": "TE",
+    "Positional Rank": 6,
+    "Overall ADP": 66.7,
+    "Total Points": 236.6,
+    "Average Points": 15.8,
+    "Expected Total Points": 153.8,
+    "Expected Average Points": 10.93
+  },
+  {
+    "Name": "Kyle Pitts Sr.",
+    "Position": "TE",
+    "Positional Rank": 7,
+    "Overall ADP": 72.8,
+    "Total Points": 131.2,
+    "Average Points": 7.7,
+    "Expected Total Points": 148.8,
+    "Expected Average Points": 10.57
+  },
+  {
+    "Name": "Evan Engram",
+    "Position": "TE",
+    "Positional Rank": 8,
+    "Overall ADP": 79.5,
+    "Total Points": 89.5,
+    "Average Points": 9.9,
+    "Expected Total Points": 143.8,
+    "Expected Average Points": 10.19
+  },
+  {
+    "Name": "Jake Ferguson",
+    "Position": "TE",
+    "Positional Rank": 9,
+    "Overall ADP": 89.2,
+    "Total Points": 104.4,
+    "Average Points": 7.5,
+    "Expected Total Points": 137.46,
+    "Expected Average Points": 9.7
+  },
+  {
+    "Name": "Brock Bowers",
+    "Position": "TE",
+    "Positional Rank": 10,
+    "Overall ADP": 95,
+    "Total Points": 262.7,
+    "Average Points": 15.5,
+    "Expected Total Points": 134.14,
+    "Expected Average Points": 9.43
+  },
+  {
+    "Name": "David Njoku",
+    "Position": "TE",
+    "Positional Rank": 11,
+    "Overall ADP": 101.1,
+    "Total Points": 148.5,
+    "Average Points": 13.5,
+    "Expected Total Points": 131.01,
+    "Expected Average Points": 9.17
+  },
+  {
+    "Name": "Dallas Goedert",
+    "Position": "TE",
+    "Positional Rank": 12,
+    "Overall ADP": 105.5,
+    "Total Points": 103.6,
+    "Average Points": 10.4,
+    "Expected Total Points": 128.98,
+    "Expected Average Points": 8.99
+  },
+  {
+    "Name": "Dalton Schultz",
+    "Position": "TE",
+    "Positional Rank": 13,
+    "Overall ADP": 117.9,
+    "Total Points": 118.2,
+    "Average Points": 7,
+    "Expected Total Points": 124.18,
+    "Expected Average Points": 8.56
+  },
+  {
+    "Name": "T.J. Hockenson",
+    "Position": "TE",
+    "Positional Rank": 14,
+    "Overall ADP": 118.7,
+    "Total Points": 86.5,
+    "Average Points": 8.7,
+    "Expected Total Points": 123.91,
+    "Expected Average Points": 8.54
+  },
+  {
+    "Name": "Pat Freiermuth",
+    "Position": "TE",
+    "Positional Rank": 15,
+    "Overall ADP": 135.5,
+    "Total Points": 168.3,
+    "Average Points": 9.9,
+    "Expected Total Points": 119.5,
+    "Expected Average Points": 8.1
+  },
+  {
+    "Name": "Cole Kmet",
+    "Position": "TE",
+    "Positional Rank": 16,
+    "Overall ADP": 137.1,
+    "Total Points": 120.4,
+    "Average Points": 7.1,
+    "Expected Total Points": 119.19,
+    "Expected Average Points": 8.07
+  },
+  {
+    "Name": "Luke Musgrave",
+    "Position": "TE",
+    "Positional Rank": 17,
+    "Overall ADP": 151.7,
+    "Total Points": 11.5,
+    "Average Points": 1.6,
+    "Expected Total Points": 117.09,
+    "Expected Average Points": 7.85
+  },
+  {
+    "Name": "Isaiah Likely",
+    "Position": "TE",
+    "Positional Rank": 18,
+    "Overall ADP": 152,
+    "Total Points": 123.7,
+    "Average Points": 7.7,
+    "Expected Total Points": 117.06,
+    "Expected Average Points": 7.84
+  },
+  {
+    "Name": "Dawson Knox",
+    "Position": "TE",
+    "Positional Rank": 19,
+    "Overall ADP": 165.9,
+    "Total Points": 59.1,
+    "Average Points": 3.7,
+    "Expected Total Points": 116.2,
+    "Expected Average Points": 7.75
   }
 ]
