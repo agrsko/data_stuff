@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Christian McCaffrey",
+    "position": "RB",
+    "team": "SF",
+    "gamesPlayed": 4,
+    "totalPoints": 47.8,
+    "avgPoints": 12.0,
+    "adpOverall": 1.4,
+    "adpRound": 1,
+    "expectedTotal": 245.88,
+    "expectedAvg": 18.10,
+    "ratioTotal": 0.194,
+    "ratioAvg": 0.663,
+    "pickStrength": 48.8
+  },
+  {
+    "name": "CeeDee Lamb",
+    "position": "WR",
+    "team": "DAL",
+    "gamesPlayed": 15,
+    "totalPoints": 263.4,
+    "avgPoints": 17.6,
+    "adpOverall": 3.7,
+    "adpRound": 1,
+    "expectedTotal": 264.86,
+    "expectedAvg": 19.22,
+    "ratioTotal": 0.994,
+    "ratioAvg": 0.916,
+    "pickStrength": 93.5
+  }
+]
