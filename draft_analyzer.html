@@ -290,26 +290,26 @@
     }
 
 
-    let pickWeights = {};  // maps overall pick -> weight
+   let pickWeights = {}; // maps overall pick -> weight
 
 function loadPickValues() {
   return fetch("pick_values.json")
     .then(res => res.json())
     .then(data => {
       pickWeights = {};
+
       data.forEach(row => {
-        // handle both "Pick" and "pick", "Weight" and "weight"
-        const pick = row.Pick ?? row.pick;
-        const weight = row.Weight ?? row.weight;
-        if (pick != null && weight != null) {
+        const pick = Number(row.Pick);
+        const weight = Number(row.Weight);
+
+        if (!Number.isNaN(pick) && !Number.isNaN(weight)) {
           pickWeights[pick] = weight;
         }
       });
-      console.log("Loaded pick weights for", Object.keys(pickWeights).length, "picks");
+
+      console.log("Loaded pick weights:", pickWeights);
     })
-    .catch(err => {
-      console.error("Error loading pick_values.json", err);
-    });
+    .catch(err => console.error("Error loading pick_values.json", err));
 }
 
 
