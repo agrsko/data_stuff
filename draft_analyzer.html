@@ -437,54 +437,52 @@
           pickStrength  = player.pickStrength;
         }
 
-        const weight = getWeightForPick(overall);
-        const weightedStrength =
-          pickStrength != null ? pickStrength * weight : null;
+          const weight = getWeightForPick(overall);
+  const weightedStrength =
+    pickStrength != null ? pickStrength * weight : null;
 
-        const grade =
-          pickStrength != null ? gradeFromPickStrength(pickStrength) : null;
+  const grade =
+    pickStrength != null ? gradeFromPickStrength(pickStrength) : null;
 
-        rows.push({
-          round,
-          overall,
-          playerName,
-          player,
-          expectedTotal,
-          expectedAvg,
-          actualTotal,
-          actualAvg,
-          ratioTotal,
-          ratioAvg,
-          pickStrength,
-          weight,
-          weightedStrength,
-          grade
-        });
-      });
+  rows.push({
+    round,
+    overall,
+    playerName,
+    player,
+    expectedTotal,
+    expectedAvg,
+    actualTotal,
+    actualAvg,
+    ratioTotal,
+    ratioAvg,
+    pickStrength,
+    weight,            // <- pick weight stored here
+    weightedStrength,  // <- pickStrength * weight
+    grade
+  });
+}); // end inputs.forEach
 
       if (!rows.length) {
         resultsContainer.innerHTML = "<p>No players entered yet.</p>";
         return;
       }
 
-      // Compute Overall Draft Strength (weightedStrength weighted by pick weight)
+// Overall Draft Strength = sum(weightedStrength) / sum(weight)
 const totalWeightedStrength = rows.reduce(
-  (sum, r) => sum + ((r.weightedStrength || 0) * (r.pickWeight || 0)),
+  (sum, r) => sum + (r.weightedStrength || 0),
   0
 );
 
 const totalPickWeights = rows.reduce(
-  (sum, r) => sum + (r.pickWeight || 0),
+  (sum, r) => sum + (r.weight || 0),
   0
 );
 
-// Avoid divide-by-zero
 const overallDraftStrength =
   totalPickWeights > 0 ? totalWeightedStrength / totalPickWeights : 0;
 
-
-      let html = "";
-      html += `<p><strong>Total weighted draft score:</strong> ${overallDraftStrength.toFixed(3)}</p>`;
+let html = "";
+html += `<p><strong>Overall draft strength:</strong> ${overallDraftStrength.toFixed(3)}</p>`;
 
       html += "<table>";
       html += "<thead><tr>";
