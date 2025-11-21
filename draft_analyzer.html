@@ -25,9 +25,9 @@
       font-size: 0.9rem;
     }
     main {
-      max-width: 900px;
+      max-width: 960px;
       margin: 1.5rem auto 2rem;
-      padding: 0 1rem;
+      padding: 0 1rem 1.5rem;
       background: #fff;
       border-radius: 6px;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
@@ -56,7 +56,7 @@
     }
     button {
       margin: 1rem 1.5rem 0;
-      padding: 0.4rem 0.8rem;
+      padding: 0.45rem 1rem;
       border-radius: 4px;
       border: 1px solid #111;
       background: #111;
@@ -85,9 +85,11 @@
       border: 1px solid #ddd;
       padding: 0.35rem 0.5rem;
       text-align: left;
+      vertical-align: top;
     }
     th {
       background: #f0f0f0;
+      font-weight: 600;
     }
     .not-found {
       color: #b00020;
@@ -101,7 +103,7 @@
     <div>
       <h1 style="margin:0;font-size:1.3rem;">Fantasy Football Draft Analyzer</h1>
       <p style="margin:0.2rem 0 0;font-size:0.9rem;opacity:0.85;">
-        Choose your draft settings, enter your picks, and get grades.
+        Choose your draft settings, enter your picks, and get weighted draft grades.
       </p>
     </div>
     <div>
@@ -112,20 +114,21 @@
   <main>
     <!-- Intro -->
     <section>
-      <h2>How it works (v1)</h2>
+      <h2>How it works</h2>
       <p class="small">
-        Step 1: Set your draft settings.<br />
-        Step 2: Click <strong>Build picks table</strong> to generate one row per round.<br />
-        Step 3: Type your players in order. For each player, the tool reads 2024 stats
-        and expected totals/averages, computes:
+        1. Set your draft settings and build the picks table.<br />
+        2. Type in the player you drafted at each pick (autocomplete from 2020–2024 data).<br />
+        3. The tool pulls each player’s actual vs expected points, computes:
       </p>
       <ul class="small">
         <li><strong>ratioTotal</strong> = Total Points / Expected Total Points</li>
         <li><strong>ratioAvg</strong> = Average Points / Expected Average Points</li>
-        <li><strong>Pick Strength</strong> = ratioAvg^0.75 × ratioTotal^0.25</li>
+        <li><strong>Pick Strength</strong> = ratioAvg<sup>0.75</sup> × ratioTotal<sup>0.25</sup></li>
+        <li><strong>Pick Weight</strong> from your pick value chart (1–180)</li>
+        <li><strong>Weighted Strength</strong> = Pick Strength × Pick Weight</li>
       </ul>
       <p class="small">
-        Letter grades are based on Pick Strength (you can tune the thresholds later).
+        Letter grades are based on Pick Strength (you can tweak thresholds in the code).
       </p>
     </section>
 
@@ -163,8 +166,7 @@
         </label>
       </div>
       <p class="small">
-        These settings let the tool compute each pick&apos;s round and overall draft
-        position, so you only have to type in player names.
+        These settings determine the overall pick numbers so the tool can apply your pick value weights.
       </p>
 
       <button id="buildPicksBtn">Build picks table</button>
@@ -174,8 +176,7 @@
     <section>
       <h3>Your picks</h3>
       <p class="small">
-        After building the picks table, enter the player you drafted in each
-        round. Names will autocomplete from the 2024 player list.
+        After building the picks table, enter the player you drafted at each pick. Names autocomplete from the player list.
       </p>
       <div id="picksTableContainer" class="small">
         <p>No picks yet. Choose your settings and click &ldquo;Build picks table.&rdquo;</p>
@@ -197,15 +198,19 @@
   <datalist id="playersList"></datalist>
 
   <script>
-    // ---- PLAYER DATA LOADING (from players_2024.json) ----------------------
+    // ------------------ GLOBAL DATA ------------------
 
-    let players = [];
+    let players = [];      // from players_2024.json
+    let pickWeights = {};  // from pick_values.json
+    let minPick = null;
+    let maxPick = null;
+
+    // ------------------ PLAYER DATA LOADING ------------------
 
     function loadPlayers() {
       return fetch("players_2024.json")
         .then(res => res.json())
         .then(data => {
-          // Map your column names (Name, Total Points, etc.) into normalized fields
           players = data.map(original => {
             const p = original;
 
@@ -236,7 +241,7 @@
             }
 
             return {
-              ...original,      // keep all original fields too
+              ...original,      // keep original fields
               name,
               position,
               team,
@@ -263,57 +268,76 @@
       const list = document.getElementById("playersList");
       if (!list || !players.length) return;
       list.innerHTML = players
-        .map(p => `<option value="${p.name}"></option>`)
+        .map(p => p.name ? `<option value="${p.name}"></option>` : "")
         .join("");
     }
 
     function findPlayerByName(name) {
       const clean = name.trim().toLowerCase();
-      return players.find(p => p.name && p.name.toLowerCase() === clean) || null;
+      return players.find(
+        p => p.name && p.name.toLowerCase() === clean
+      ) || null;
     }
 
-    // Grades based on pickStrength (you can tune thresholds)
+    // ------------------ PICK VALUE LOADING ------------------
+
+    function loadPickValues() {
+      return fetch("pick_values.json")
+        .then(res => res.json())
+        .then(data => {
+          pickWeights = {};
+          data.forEach(row => {
+            const pick = Number(row.Pick);
+            const weight = Number(row.Weight);
+            if (!Number.isNaN(pick) && !Number.isNaN(weight)) {
+              pickWeights[pick] = weight;
+            }
+          });
+          const keys = Object.keys(pickWeights).map(Number);
+          minPick = Math.min(...keys);
+          maxPick = Math.max(...keys);
+          console.log("Loaded pick weights for", keys.length, "picks");
+          console.log("Example weights:", {
+            1: pickWeights[1],
+            2: pickWeights[2],
+            8: pickWeights[8],
+            24: pickWeights[24]
+          });
+        })
+        .catch(err => {
+          console.error("Error loading pick_values.json", err);
+        });
+    }
+
+    // Get weight for a given overall pick, with fallback for picks beyond the table
+    function getWeightForPick(overall) {
+      if (!pickWeights || !Object.keys(pickWeights).length) return 1.0;
+      if (pickWeights[overall] != null) return pickWeights[overall];
+
+      if (maxPick != null && overall > maxPick) {
+        return pickWeights[maxPick]; // use last known weight for very late picks
+      }
+      if (minPick != null && overall < minPick) {
+        return pickWeights[minPick];
+      }
+      return 1.0;
+    }
+
+    // ------------------ GRADING ------------------
+
+    // Simple grade function based on pickStrength; tweak thresholds as you like
     function gradeFromPickStrength(ps) {
-      if (ps == null) return null;
-      if (ps >= 1.6932) return "A+";
-      if (ps >= 1.4946) return "A";
-      if (ps >= 1.3953) return "A-";
-      if (ps >= 1.1967) return "B+";
-      if (ps >= 1.0974) return "B";
-      if (ps >= 0.9981) return "B-";
-      if (ps >= 0.8989) return "C+";
-      if (ps >= 0.7996) return "C";
-      if (ps >= 0.601) return "C-";
-      if (ps >= 0.5017) return "D+";
-      if (ps >= 0.3031) return "D";
+      if (ps == null || Number.isNaN(ps)) return null;
+
+      if (ps >= 1.25) return "A+";
+      if (ps >= 1.15) return "A";
+      if (ps >= 1.05) return "B";
+      if (ps >= 0.95) return "C";
+      if (ps >= 0.85) return "D";
       return "F";
     }
 
-
-   let pickWeights = {}; // maps overall pick -> weight
-
-function loadPickValues() {
-  return fetch("pick_values.json")
-    .then(res => res.json())
-    .then(data => {
-      pickWeights = {};
-
-      data.forEach(row => {
-        const pick = Number(row.Pick);
-        const weight = Number(row.Weight);
-
-        if (!Number.isNaN(pick) && !Number.isNaN(weight)) {
-          pickWeights[pick] = weight;
-        }
-      });
-
-      console.log("Loaded pick weights:", pickWeights);
-    })
-    .catch(err => console.error("Error loading pick_values.json", err));
-}
-
-
-    // ---- DRAFT LAYOUT LOGIC ------------------------------------------------
+    // ------------------ DRAFT LAYOUT ------------------
 
     function computePickInfo(round, numTeams, slot, draftType) {
       let pickInRound;
@@ -344,11 +368,13 @@ function loadPickValues() {
 
       let html = "<table>";
       html += "<thead><tr>";
-      html += "<th>Round</th><th>Overall Pick</th><th>Player</th>";
+      html += "<th>Round</th>";
+      html += "<th>Overall pick</th>";
+      html += "<th>Player</th>";
       html += "</tr></thead><tbody>";
 
       for (let r = 1; r <= numRounds; r++) {
-        const { pickInRound, overall } = computePickInfo(r, numTeams, slot, draftType);
+        const { overall } = computePickInfo(r, numTeams, slot, draftType);
         html += "<tr>";
         html += `<td>${r}</td>`;
         html += `<td>${overall}</td>`;
@@ -356,7 +382,6 @@ function loadPickValues() {
                              class="player-input"
                              data-round="${r}"
                              data-overall="${overall}"
-                             data-pick-in-round="${pickInRound}"
                              list="playersList"
                              placeholder="Start typing a player name..." /></td>`;
         html += "</tr>";
@@ -366,146 +391,137 @@ function loadPickValues() {
       container.innerHTML = html;
     }
 
-    // ---- ANALYSIS / GRADING -------------------------------------------------
+    // ------------------ ANALYSIS ------------------
 
     function analyzeDraft() {
-  const inputs = document.querySelectorAll(".player-input");
-  const resultsContainer = document.getElementById("resultsContainer");
+      const inputs = document.querySelectorAll(".player-input");
+      const resultsContainer = document.getElementById("resultsContainer");
 
-  if (!inputs.length) {
-    resultsContainer.innerHTML = "<p>Build the picks table and enter players first.</p>";
-    return;
-  }
+      if (!inputs.length) {
+        resultsContainer.innerHTML = "<p>Build the picks table and enter players first.</p>";
+        return;
+      }
 
-  const rows = [];
+      const rows = [];
 
-  inputs.forEach(input => {
-    const playerName = input.value.trim();
-    if (!playerName) return; // skip empty rounds
+      inputs.forEach(input => {
+        const playerName = input.value.trim();
+        if (!playerName) return; // skip empty rows
 
-    const round = Number(input.dataset.round);
-    const overall = Number(input.dataset.overall);
+        const round = Number(input.dataset.round);
+        const overall = Number(input.dataset.overall);
 
-    const player = findPlayerByName(playerName);
+        const player = findPlayerByName(playerName);
 
-    let expectedTotal = null;
-    let expectedAvg   = null;
-    let actualTotal   = null;
-    let actualAvg     = null;
-    let ratioTotal    = null;
-    let ratioAvg      = null;
-    let pickStrength  = null;
+        let expectedTotal = null;
+        let expectedAvg   = null;
+        let actualTotal   = null;
+        let actualAvg     = null;
+        let ratioTotal    = null;
+        let ratioAvg      = null;
+        let pickStrength  = null;
 
-    if (player) {
-      expectedTotal = player.expectedTotal;
-      expectedAvg   = player.expectedAvg;
-      actualTotal   = player.totalPoints;
-      actualAvg     = player.avgPoints;
-      ratioTotal    = player.ratioTotal;
-      ratioAvg      = player.ratioAvg;
-      pickStrength  = player.pickStrength;
+        if (player) {
+          expectedTotal = player.expectedTotal;
+          expectedAvg   = player.expectedAvg;
+          actualTotal   = player.totalPoints;
+          actualAvg     = player.avgPoints;
+          ratioTotal    = player.ratioTotal;
+          ratioAvg      = player.ratioAvg;
+          pickStrength  = player.pickStrength;
+        }
+
+        const weight = getWeightForPick(overall);
+        const weightedStrength =
+          pickStrength != null ? pickStrength * weight : null;
+
+        const grade =
+          pickStrength != null ? gradeFromPickStrength(pickStrength) : null;
+
+        rows.push({
+          round,
+          overall,
+          playerName,
+          player,
+          expectedTotal,
+          expectedAvg,
+          actualTotal,
+          actualAvg,
+          ratioTotal,
+          ratioAvg,
+          pickStrength,
+          weight,
+          weightedStrength,
+          grade
+        });
+      });
+
+      if (!rows.length) {
+        resultsContainer.innerHTML = "<p>No players entered yet.</p>";
+        return;
+      }
+
+      const totalWeighted = rows.reduce(
+        (sum, r) => sum + (r.weightedStrength || 0),
+        0
+      );
+
+      let html = "";
+      html += `<p><strong>Total weighted draft score:</strong> ${totalWeighted.toFixed(3)}</p>`;
+
+      html += "<table>";
+      html += "<thead><tr>";
+      html += "<th>Round</th>";
+      html += "<th>Overall</th>";
+      html += "<th>Pick Weight</th>";
+      html += "<th>Weighted Strength</th>";
+      html += "<th>Player</th>";
+      html += "<th>Pos</th>";
+      html += "<th>Total</th>";
+      html += "<th>Avg</th>";
+      html += "<th>Exp Total</th>";
+      html += "<th>Exp Avg</th>";
+      html += "<th>ratioTotal</th>";
+      html += "<th>ratioAvg</th>";
+      html += "<th>Pick Strength</th>";
+      html += "<th>Grade</th>";
+      html += "</tr></thead><tbody>";
+
+      rows.forEach(r => {
+        const pos = r.player ? r.player.position : "";
+
+        html += "<tr>";
+        html += `<td>${r.round}</td>`;
+        html += `<td>${r.overall}</td>`;
+        html += `<td>${r.weight != null ? r.weight.toFixed(3) : "—"}</td>`;
+        html += `<td>${r.weightedStrength != null ? r.weightedStrength.toFixed(3) : "—"}</td>`;
+        html += `<td>${r.playerName}${
+          !r.player ? '<span class="not-found"> (not found)</span>' : ""
+        }</td>`;
+        html += `<td>${pos}</td>`;
+        html += `<td>${r.actualTotal != null ? r.actualTotal.toFixed(1) : "—"}</td>`;
+        html += `<td>${r.actualAvg != null ? r.actualAvg.toFixed(1) : "—"}</td>`;
+        html += `<td>${r.expectedTotal != null ? r.expectedTotal.toFixed(1) : "—"}</td>`;
+        html += `<td>${r.expectedAvg != null ? r.expectedAvg.toFixed(1) : "—"}</td>`;
+        html += `<td>${r.ratioTotal != null ? r.ratioTotal.toFixed(3) : "—"}</td>`;
+        html += `<td>${r.ratioAvg != null ? r.ratioAvg.toFixed(3) : "—"}</td>`;
+        html += `<td>${r.pickStrength != null ? r.pickStrength.toFixed(3) : "—"}</td>`;
+        html += `<td>${r.grade || "—"}</td>`;
+        html += "</tr>";
+      });
+
+      html += "</tbody></table>";
+      resultsContainer.innerHTML = html;
     }
 
-    // look up weight by overall pick; default to 1 if not found
-    const weight = pickWeights[overall] ?? 1.0;
-    const weightedStrength =
-      pickStrength != null ? pickStrength * weight : null;
-
-    const grade =
-      pickStrength != null ? gradeFromPickStrength(pickStrength) : null;
-
-    rows.push({
-      round,
-      overall,
-      playerName,
-      player,
-      expectedTotal,
-      expectedAvg,
-      actualTotal,
-      actualAvg,
-      ratioTotal,
-      ratioAvg,
-      pickStrength,
-      weight,
-      weightedStrength,
-      grade
-    });
-  });
-
-  if (!rows.length) {
-    resultsContainer.innerHTML = "<p>No players entered yet.</p>";
-    return;
-  }
-
-  // Optional overall draft score (sum of weighted strengths)
-  const totalWeighted = rows.reduce(
-    (sum, r) => sum + (r.weightedStrength || 0),
-    0
-  );
-
-  // --- Build results table HTML ---
-
-  let html = "";
-
-  html += `<p><strong>Total weighted draft score:</strong> ${totalWeighted.toFixed(
-    3
-  )}</p>`;
-
-  html += "<table>";
-  html += "<thead><tr>";
-  html += "<th>Round</th>";
-  html += "<th>Overall</th>";
-  html += "<th>Pick Weight</th>";
-  html += "<th>Weighted Strength</th>";
-  html += "<th>Player</th>";
-  html += "<th>Pos</th>";
-  html += "<th>Total</th>";
-  html += "<th>Avg</th>";
-  html += "<th>Exp Total</th>";
-  html += "<th>Exp Avg</th>";
-  html += "<th>ratioTotal</th>";
-  html += "<th>ratioAvg</th>";
-  html += "<th>Pick Strength</th>";
-  html += "<th>Grade</th>";
-  html += "</tr></thead><tbody>";
-
-  rows.forEach(r => {
-    const pos = r.player ? r.player.position : "";
-
-    html += "<tr>";
-    html += `<td>${r.round}</td>`;
-    html += `<td>${r.overall}</td>`;
-    html += `<td>${r.weight != null ? r.weight.toFixed(3) : "—"}</td>`;
-    html += `<td>${r.weightedStrength != null ? r.weightedStrength.toFixed(3) : "—"}</td>`;
-    html += `<td>${r.playerName}${
-      !r.player ? '<span class="not-found"> (not found)</span>' : ""
-    }</td>`;
-    html += `<td>${pos}</td>`;
-    html += `<td>${r.actualTotal != null ? r.actualTotal.toFixed(1) : "—"}</td>`;
-    html += `<td>${r.actualAvg != null ? r.actualAvg.toFixed(1) : "—"}</td>`;
-    html += `<td>${r.expectedTotal != null ? r.expectedTotal.toFixed(1) : "—"}</td>`;
-    html += `<td>${r.expectedAvg != null ? r.expectedAvg.toFixed(1) : "—"}</td>`;
-    html += `<td>${r.ratioTotal != null ? r.ratioTotal.toFixed(3) : "—"}</td>`;
-    html += `<td>${r.ratioAvg != null ? r.ratioAvg.toFixed(3) : "—"}</td>`;
-    html += `<td>${r.pickStrength != null ? r.pickStrength.toFixed(3) : "—"}</td>`;
-    html += `<td>${r.grade || "—"}</td>`;
-    html += "</tr>";
-  });
-
-  html += "</tbody></table>";
-
-  resultsContainer.innerHTML = html;
-}
-
-
-    // ---- WIRE UP PAGE ------------------------------------------------------
+    // ------------------ WIRE UP ------------------
 
     document.getElementById("buildPicksBtn").addEventListener("click", buildPicksTable);
     document.getElementById("analyzeBtn").addEventListener("click", analyzeDraft);
 
-   // Load player + pick value data when page loads
-loadPlayers();
-loadPickValues();
+    // Load data on page load
+    loadPlayers();
+    loadPickValues();
   </script>
 </body>
 </html>
