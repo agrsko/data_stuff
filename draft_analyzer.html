@@ -327,6 +327,8 @@
 
     // Simple grade function based on pickStrength; tweak thresholds as you like
     function gradeFromPickStrength(ps) {
+      ps = Number(ps);
+      
       if (ps == null || Number.isNaN(ps)) return null;
 
       if (ps >= 1.6932) return "A+";
