@@ -369,113 +369,134 @@ function loadPickValues() {
     // ---- ANALYSIS / GRADING -------------------------------------------------
 
     function analyzeDraft() {
-      const inputs = document.querySelectorAll(".player-input");
-      const resultsContainer = document.getElementById("resultsContainer");
+  const inputs = document.querySelectorAll(".player-input");
+  const resultsContainer = document.getElementById("resultsContainer");
 
-      if (!inputs.length) {
-        resultsContainer.innerHTML = "<p>Build the picks table and enter players first.</p>";
-        return;
-      }
+  if (!inputs.length) {
+    resultsContainer.innerHTML = "<p>Build the picks table and enter players first.</p>";
+    return;
+  }
 
-      const rows = [];
-      inputs.forEach(input => {
-        const playerName = input.value.trim();
-        if (!playerName) return;
+  const rows = [];
 
-        const round = Number(input.dataset.round);
-        const overall = Number(input.dataset.overall);
-        const weight = pickWeights[overall] ?? 1.0;
-        const pickInRound = Number(input.dataset["pickInRound"]);
+  inputs.forEach(input => {
+    const playerName = input.value.trim();
+    if (!playerName) return; // skip empty rounds
 
-        const player = findPlayerByName(playerName);
+    const round = Number(input.dataset.round);
+    const overall = Number(input.dataset.overall);
 
-        let expectedTotal = null;
-        let expectedAvg   = null;
-        let actualTotal   = null;
-        let actualAvg     = null;
-        let ratioTotal    = null;
-        let ratioAvg      = null;
-        let pickStrength  = null;
-        let grade         = null;
+    const player = findPlayerByName(playerName);
 
-        if (player) {
-          expectedTotal = player.expectedTotal;
-          expectedAvg   = player.expectedAvg;
-          actualTotal   = player.totalPoints;
-          actualAvg     = player.avgPoints;
-          ratioTotal    = player.ratioTotal;
-          ratioAvg      = player.ratioAvg;
-          pickStrength  = player.pickStrength;
-          grade         = gradeFromPickStrength(pickStrength);
-        }
+    let expectedTotal = null;
+    let expectedAvg   = null;
+    let actualTotal   = null;
+    let actualAvg     = null;
+    let ratioTotal    = null;
+    let ratioAvg      = null;
+    let pickStrength  = null;
 
-        rows.push({
-          round,
-          overall,
-          pickInRound,
-          playerName,
-          player,
-          expectedTotal,
-          expectedAvg,
-          actualTotal,
-          actualAvg,
-          ratioTotal,
-          ratioAvg,
-          pickStrength,
-          weight,
-          weightedStrength: pickStrength != null ? pickStrength * weight : null,
-  zScore: null,
-  grade: null
-        });
-      });
-
-      if (!rows.length) {
-        resultsContainer.innerHTML = "<p>No players entered yet.</p>";
-        return;
-      }
-
-      let html = "<table>";
-      html += "<thead><tr>";
-      html += "<th>Round</th>";
-      html += "<th>Overall</th>";
-      html += "<th>Pick Weight</th>";
-      html += "<th>Weighted Strength</th>";
-      html += "<th>Player</th>";
-      html += "<th>Pos</th>";
-      html += "<th>Total</th>";
-      html += "<th>Avg</th>";
-      html += "<th>Exp Total</th>";
-      html += "<th>Exp Avg</th>";
-      html += "<th>ratioTotal</th>";
-      html += "<th>ratioAvg</th>";
-      html += "<th>Pick Strength</th>";
-      html += "<th>Grade</th>";
-      html += "</tr></thead><tbody>";
-
-
-      rows.forEach(r => {
-        const pos = r.player ? r.player.position : "";
-        html += "<tr>";
-        html += `<td>${r.round}</td>`;
-        html += `<td>${r.overall}</td>`;
-        html += `<td>${r.weight != null ? r.weight.toFixed(3) : "—"}</td>`;
-        html += `<td>${r.weightedStrength != null ? r.weightedStrength.toFixed(3) : "—"}</td>`;
-        html += `<td>${r.playerName}${!r.player ? '<span class="not-found"> (not found)</span>' : ""}</td>`;
-        html += `<td>${pos}</td>`;
-        html += `<td>${r.actualTotal != null ? r.actualTotal.toFixed(1) : "—"}</td>`;
-        html += `<td>${r.actualAvg != null ? r.actualAvg.toFixed(1) : "—"}</td>`;
-        html += `<td>${r.expectedTotal != null ? r.expectedTotal.toFixed(1) : "—"}</td>`;
-        html += `<td>${r.expectedAvg != null ? r.expectedAvg.toFixed(1) : "—"}</td>`;
-        html += `<td>${r.ratioTotal != null ? r.ratioTotal.toFixed(3) : "—"}</td>`;
-        html += `<td>${r.ratioAvg != null ? r.ratioAvg.toFixed(3) : "—"}</td>`;
-        html += `<td>${r.pickStrength != null ? r.pickStrength.toFixed(3) : "—"}</td>`;
-        html += `<td>${r.grade || "—"}</td>`;
-        html += "</tr>";
-      });
-
-      html += "</tbody></table>";
-      resultsContainer.innerHTML = html;
+    if (player) {
+      expectedTotal = player.expectedTotal;
+      expectedAvg   = player.expectedAvg;
+      actualTotal   = player.totalPoints;
+      actualAvg     = player.avgPoints;
+      ratioTotal    = player.ratioTotal;
+      ratioAvg      = player.ratioAvg;
+      pickStrength  = player.pickStrength;
     }
+
+    // look up weight by overall pick; default to 1 if not found
+    const weight = pickWeights[overall] ?? 1.0;
+    const weightedStrength =
+      pickStrength != null ? pickStrength * weight : null;
+
+    const grade =
+      pickStrength != null ? gradeFromPickStrength(pickStrength) : null;
+
+    rows.push({
+      round,
+      overall,
+      playerName,
+      player,
+      expectedTotal,
+      expectedAvg,
+      actualTotal,
+      actualAvg,
+      ratioTotal,
+      ratioAvg,
+      pickStrength,
+      weight,
+      weightedStrength,
+      grade
+    });
+  });
+
+  if (!rows.length) {
+    resultsContainer.innerHTML = "<p>No players entered yet.</p>";
+    return;
+  }
+
+  // Optional overall draft score (sum of weighted strengths)
+  const totalWeighted = rows.reduce(
+    (sum, r) => sum + (r.weightedStrength || 0),
+    0
+  );
+
+  // --- Build results table HTML ---
+
+  let html = "";
+
+  html += `<p><strong>Total weighted draft score:</strong> ${totalWeighted.toFixed(
+    3
+  )}</p>`;
+
+  html += "<table>";
+  html += "<thead><tr>";
+  html += "<th>Round</th>";
+  html += "<th>Overall</th>";
+  html += "<th>Pick Weight</th>";
+  html += "<th>Weighted Strength</th>";
+  html += "<th>Player</th>";
+  html += "<th>Pos</th>";
+  html += "<th>Total</th>";
+  html += "<th>Avg</th>";
+  html += "<th>Exp Total</th>";
+  html += "<th>Exp Avg</th>";
+  html += "<th>ratioTotal</th>";
+  html += "<th>ratioAvg</th>";
+  html += "<th>Pick Strength</th>";
+  html += "<th>Grade</th>";
+  html += "</tr></thead><tbody>";
+
+  rows.forEach(r => {
+    const pos = r.player ? r.player.position : "";
+
+    html += "<tr>";
+    html += `<td>${r.round}</td>`;
+    html += `<td>${r.overall}</td>`;
+    html += `<td>${r.weight != null ? r.weight.toFixed(3) : "—"}</td>`;
+    html += `<td>${r.weightedStrength != null ? r.weightedStrength.toFixed(3) : "—"}</td>`;
+    html += `<td>${r.playerName}${
+      !r.player ? '<span class="not-found"> (not found)</span>' : ""
+    }</td>`;
+    html += `<td>${pos}</td>`;
+    html += `<td>${r.actualTotal != null ? r.actualTotal.toFixed(1) : "—"}</td>`;
+    html += `<td>${r.actualAvg != null ? r.actualAvg.toFixed(1) : "—"}</td>`;
+    html += `<td>${r.expectedTotal != null ? r.expectedTotal.toFixed(1) : "—"}</td>`;
+    html += `<td>${r.expectedAvg != null ? r.expectedAvg.toFixed(1) : "—"}</td>`;
+    html += `<td>${r.ratioTotal != null ? r.ratioTotal.toFixed(3) : "—"}</td>`;
+    html += `<td>${r.ratioAvg != null ? r.ratioAvg.toFixed(3) : "—"}</td>`;
+    html += `<td>${r.pickStrength != null ? r.pickStrength.toFixed(3) : "—"}</td>`;
+    html += `<td>${r.grade || "—"}</td>`;
+    html += "</tr>";
+  });
+
+  html += "</tbody></table>";
+
+  resultsContainer.innerHTML = html;
+}
+
 
     // ---- WIRE UP PAGE ------------------------------------------------------
 
