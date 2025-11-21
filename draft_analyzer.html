@@ -289,6 +289,30 @@
       return "F";
     }
 
+
+    let pickWeights = {};  // maps overall pick -> weight
+
+function loadPickValues() {
+  return fetch("pick_values.json")
+    .then(res => res.json())
+    .then(data => {
+      pickWeights = {};
+      data.forEach(row => {
+        // handle both "Pick" and "pick", "Weight" and "weight"
+        const pick = row.Pick ?? row.pick;
+        const weight = row.Weight ?? row.weight;
+        if (pick != null && weight != null) {
+          pickWeights[pick] = weight;
+        }
+      });
+      console.log("Loaded pick weights for", Object.keys(pickWeights).length, "picks");
+    })
+    .catch(err => {
+      console.error("Error loading pick_values.json", err);
+    });
+}
+
+
     // ---- DRAFT LAYOUT LOGIC ------------------------------------------------
 
     function computePickInfo(round, numTeams, slot, draftType) {
@@ -360,6 +384,7 @@
 
         const round = Number(input.dataset.round);
         const overall = Number(input.dataset.overall);
+        const weight = pickWeights[overall] ?? 1.0;
         const pickInRound = Number(input.dataset["pickInRound"]);
 
         const player = findPlayerByName(playerName);
@@ -397,7 +422,10 @@
           ratioTotal,
           ratioAvg,
           pickStrength,
-          grade
+          weight,
+          weightedStrength: pickStrength != null ? pickStrength * weight : null,
+  zScore: null,
+  grade: null
         });
       });
 
@@ -415,6 +443,7 @@
       html += "<th>ratioTotal</th><th>ratioAvg</th>";
       html += "<th>Pick Strength</th><th>Grade</th>";
       html += "</tr></thead><tbody>";
+      html += "<th>Pick Weight</th><th>Weighted Strength</th>";
 
       rows.forEach(r => {
         const pos = r.player ? r.player.position : "";
@@ -430,6 +459,8 @@
         html += `<td>${r.ratioTotal != null ? r.ratioTotal.toFixed(3) : "—"}</td>`;
         html += `<td>${r.ratioAvg != null ? r.ratioAvg.toFixed(3) : "—"}</td>`;
         html += `<td>${r.pickStrength != null ? r.pickStrength.toFixed(3) : "—"}</td>`;
+        html += `<td>${r.weight != null ? r.weight.toFixed(3) : "—"}</td>`;
+        html += `<td>${r.weightedStrength != null ? r.weightedStrength.toFixed(3) : "—"}</td>`;
         html += `<td>${r.grade || "—"}</td>`;
         html += "</tr>";
       });
@@ -443,8 +474,9 @@
     document.getElementById("buildPicksBtn").addEventListener("click", buildPicksTable);
     document.getElementById("analyzeBtn").addEventListener("click", analyzeDraft);
 
-    // Load player data when page loads
-    loadPlayers();
+   // Load player + pick value data when page loads
+loadPlayers();
+loadPickValues();
   </script>
 </body>
 </html>
