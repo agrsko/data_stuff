@@ -461,10 +461,21 @@
         return;
       }
 
-      const totalWeighted = rows.reduce(
-        (sum, r) => sum + (r.weightedStrength || 0),
-        0
-      );
+      // Compute Overall Draft Strength (weightedStrength weighted by pick weight)
+const totalWeightedStrength = rows.reduce(
+  (sum, r) => sum + ((r.weightedStrength || 0) * (r.pickWeight || 0)),
+  0
+);
+
+const totalPickWeights = rows.reduce(
+  (sum, r) => sum + (r.pickWeight || 0),
+  0
+);
+
+// Avoid divide-by-zero
+const overallDraftStrength =
+  totalPickWeights > 0 ? totalWeightedStrength / totalPickWeights : 0;
+
 
       let html = "";
       html += `<p><strong>Total weighted draft score:</strong> ${totalWeighted.toFixed(3)}</p>`;
