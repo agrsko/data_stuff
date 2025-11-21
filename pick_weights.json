@@ -1,0 +1,722 @@
+[
+  {
+    "Pick": 1,
+    "Weight": 1
+  },
+  {
+    "Pick": 2,
+    "Weight": 0.8671
+  },
+  {
+    "Pick": 3,
+    "Weight": 0.7896
+  },
+  {
+    "Pick": 4,
+    "Weight": 0.7353
+  },
+  {
+    "Pick": 5,
+    "Weight": 0.6921
+  },
+  {
+    "Pick": 6,
+    "Weight": 0.6578
+  },
+  {
+    "Pick": 7,
+    "Weight": 0.6279
+  },
+  {
+    "Pick": 8,
+    "Weight": 0.6024
+  },
+  {
+    "Pick": 9,
+    "Weight": 0.5792
+  },
+  {
+    "Pick": 10,
+    "Weight": 0.5592
+  },
+  {
+    "Pick": 11,
+    "Weight": 0.5415
+  },
+  {
+    "Pick": 12,
+    "Weight": 0.5249
+  },
+  {
+    "Pick": 13,
+    "Weight": 0.5094
+  },
+  {
+    "Pick": 14,
+    "Weight": 0.495
+  },
+  {
+    "Pick": 15,
+    "Weight": 0.4817
+  },
+  {
+    "Pick": 16,
+    "Weight": 0.4695
+  },
+  {
+    "Pick": 17,
+    "Weight": 0.4585
+  },
+  {
+    "Pick": 18,
+    "Weight": 0.4474
+  },
+  {
+    "Pick": 19,
+    "Weight": 0.4363
+  },
+  {
+    "Pick": 20,
+    "Weight": 0.4264
+  },
+  {
+    "Pick": 21,
+    "Weight": 0.4175
+  },
+  {
+    "Pick": 22,
+    "Weight": 0.4086
+  },
+  {
+    "Pick": 23,
+    "Weight": 0.3998
+  },
+  {
+    "Pick": 24,
+    "Weight": 0.392
+  },
+  {
+    "Pick": 25,
+    "Weight": 0.3843
+  },
+  {
+    "Pick": 26,
+    "Weight": 0.3765
+  },
+  {
+    "Pick": 27,
+    "Weight": 0.3699
+  },
+  {
+    "Pick": 28,
+    "Weight": 0.3621
+  },
+  {
+    "Pick": 29,
+    "Weight": 0.3555
+  },
+  {
+    "Pick": 30,
+    "Weight": 0.3488
+  },
+  {
+    "Pick": 31,
+    "Weight": 0.3433
+  },
+  {
+    "Pick": 32,
+    "Weight": 0.3367
+  },
+  {
+    "Pick": 33,
+    "Weight": 0.3311
+  },
+  {
+    "Pick": 34,
+    "Weight": 0.3256
+  },
+  {
+    "Pick": 35,
+    "Weight": 0.32
+  },
+  {
+    "Pick": 36,
+    "Weight": 0.3145
+  },
+  {
+    "Pick": 37,
+    "Weight": 0.309
+  },
+  {
+    "Pick": 38,
+    "Weight": 0.3034
+  },
+  {
+    "Pick": 39,
+    "Weight": 0.299
+  },
+  {
+    "Pick": 40,
+    "Weight": 0.2946
+  },
+  {
+    "Pick": 41,
+    "Weight": 0.289
+  },
+  {
+    "Pick": 42,
+    "Weight": 0.2846
+  },
+  {
+    "Pick": 43,
+    "Weight": 0.2802
+  },
+  {
+    "Pick": 44,
+    "Weight": 0.2757
+  },
+  {
+    "Pick": 45,
+    "Weight": 0.2713
+  },
+  {
+    "Pick": 46,
+    "Weight": 0.2669
+  },
+  {
+    "Pick": 47,
+    "Weight": 0.2636
+  },
+  {
+    "Pick": 48,
+    "Weight": 0.2591
+  },
+  {
+    "Pick": 49,
+    "Weight": 0.2558
+  },
+  {
+    "Pick": 50,
+    "Weight": 0.2514
+  },
+  {
+    "Pick": 51,
+    "Weight": 0.2481
+  },
+  {
+    "Pick": 52,
+    "Weight": 0.2436
+  },
+  {
+    "Pick": 53,
+    "Weight": 0.2403
+  },
+  {
+    "Pick": 54,
+    "Weight": 0.237
+  },
+  {
+    "Pick": 55,
+    "Weight": 0.2337
+  },
+  {
+    "Pick": 56,
+    "Weight": 0.2292
+  },
+  {
+    "Pick": 57,
+    "Weight": 0.2259
+  },
+  {
+    "Pick": 58,
+    "Weight": 0.2226
+  },
+  {
+    "Pick": 59,
+    "Weight": 0.2193
+  },
+  {
+    "Pick": 60,
+    "Weight": 0.2171
+  },
+  {
+    "Pick": 61,
+    "Weight": 0.2137
+  },
+  {
+    "Pick": 62,
+    "Weight": 0.2104
+  },
+  {
+    "Pick": 63,
+    "Weight": 0.2071
+  },
+  {
+    "Pick": 64,
+    "Weight": 0.2038
+  },
+  {
+    "Pick": 65,
+    "Weight": 0.2016
+  },
+  {
+    "Pick": 66,
+    "Weight": 0.1982
+  },
+  {
+    "Pick": 67,
+    "Weight": 0.1949
+  },
+  {
+    "Pick": 68,
+    "Weight": 0.1927
+  },
+  {
+    "Pick": 69,
+    "Weight": 0.1894
+  },
+  {
+    "Pick": 70,
+    "Weight": 0.1872
+  },
+  {
+    "Pick": 71,
+    "Weight": 0.1838
+  },
+  {
+    "Pick": 72,
+    "Weight": 0.1816
+  },
+  {
+    "Pick": 73,
+    "Weight": 0.1794
+  },
+  {
+    "Pick": 74,
+    "Weight": 0.1761
+  },
+  {
+    "Pick": 75,
+    "Weight": 0.1739
+  },
+  {
+    "Pick": 76,
+    "Weight": 0.1717
+  },
+  {
+    "Pick": 77,
+    "Weight": 0.1683
+  },
+  {
+    "Pick": 78,
+    "Weight": 0.1661
+  },
+  {
+    "Pick": 79,
+    "Weight": 0.1639
+  },
+  {
+    "Pick": 80,
+    "Weight": 0.1617
+  },
+  {
+    "Pick": 81,
+    "Weight": 0.1595
+  },
+  {
+    "Pick": 82,
+    "Weight": 0.1573
+  },
+  {
+    "Pick": 83,
+    "Weight": 0.1539
+  },
+  {
+    "Pick": 84,
+    "Weight": 0.1517
+  },
+  {
+    "Pick": 85,
+    "Weight": 0.1495
+  },
+  {
+    "Pick": 86,
+    "Weight": 0.1473
+  },
+  {
+    "Pick": 87,
+    "Weight": 0.1451
+  },
+  {
+    "Pick": 88,
+    "Weight": 0.1429
+  },
+  {
+    "Pick": 89,
+    "Weight": 0.1406
+  },
+  {
+    "Pick": 90,
+    "Weight": 0.1384
+  },
+  {
+    "Pick": 91,
+    "Weight": 0.1373
+  },
+  {
+    "Pick": 92,
+    "Weight": 0.1351
+  },
+  {
+    "Pick": 93,
+    "Weight": 0.1329
+  },
+  {
+    "Pick": 94,
+    "Weight": 0.1307
+  },
+  {
+    "Pick": 95,
+    "Weight": 0.1285
+  },
+  {
+    "Pick": 96,
+    "Weight": 0.1262
+  },
+  {
+    "Pick": 97,
+    "Weight": 0.124
+  },
+  {
+    "Pick": 98,
+    "Weight": 0.1229
+  },
+  {
+    "Pick": 99,
+    "Weight": 0.1207
+  },
+  {
+    "Pick": 100,
+    "Weight": 0.1185
+  },
+  {
+    "Pick": 101,
+    "Weight": 0.1174
+  },
+  {
+    "Pick": 102,
+    "Weight": 0.1152
+  },
+  {
+    "Pick": 103,
+    "Weight": 0.113
+  },
+  {
+    "Pick": 104,
+    "Weight": 0.1107
+  },
+  {
+    "Pick": 105,
+    "Weight": 0.1096
+  },
+  {
+    "Pick": 106,
+    "Weight": 0.1074
+  },
+  {
+    "Pick": 107,
+    "Weight": 0.1063
+  },
+  {
+    "Pick": 108,
+    "Weight": 0.1041
+  },
+  {
+    "Pick": 109,
+    "Weight": 0.1019
+  },
+  {
+    "Pick": 110,
+    "Weight": 0.1008
+  },
+  {
+    "Pick": 111,
+    "Weight": 0.0986
+  },
+  {
+    "Pick": 112,
+    "Weight": 0.0975
+  },
+  {
+    "Pick": 113,
+    "Weight": 0.0952
+  },
+  {
+    "Pick": 114,
+    "Weight": 0.0941
+  },
+  {
+    "Pick": 115,
+    "Weight": 0.0919
+  },
+  {
+    "Pick": 116,
+    "Weight": 0.0908
+  },
+  {
+    "Pick": 117,
+    "Weight": 0.0886
+  },
+  {
+    "Pick": 118,
+    "Weight": 0.0875
+  },
+  {
+    "Pick": 119,
+    "Weight": 0.0853
+  },
+  {
+    "Pick": 120,
+    "Weight": 0.0842
+  },
+  {
+    "Pick": 121,
+    "Weight": 0.0819
+  },
+  {
+    "Pick": 122,
+    "Weight": 0.0808
+  },
+  {
+    "Pick": 123,
+    "Weight": 0.0786
+  },
+  {
+    "Pick": 124,
+    "Weight": 0.0775
+  },
+  {
+    "Pick": 125,
+    "Weight": 0.0764
+  },
+  {
+    "Pick": 126,
+    "Weight": 0.0742
+  },
+  {
+    "Pick": 127,
+    "Weight": 0.0731
+  },
+  {
+    "Pick": 128,
+    "Weight": 0.072
+  },
+  {
+    "Pick": 129,
+    "Weight": 0.0698
+  },
+  {
+    "Pick": 130,
+    "Weight": 0.0687
+  },
+  {
+    "Pick": 131,
+    "Weight": 0.0676
+  },
+  {
+    "Pick": 132,
+    "Weight": 0.0653
+  },
+  {
+    "Pick": 133,
+    "Weight": 0.0642
+  },
+  {
+    "Pick": 134,
+    "Weight": 0.0631
+  },
+  {
+    "Pick": 135,
+    "Weight": 0.0609
+  },
+  {
+    "Pick": 136,
+    "Weight": 0.0598
+  },
+  {
+    "Pick": 137,
+    "Weight": 0.0587
+  },
+  {
+    "Pick": 138,
+    "Weight": 0.0576
+  },
+  {
+    "Pick": 139,
+    "Weight": 0.0554
+  },
+  {
+    "Pick": 140,
+    "Weight": 0.0543
+  },
+  {
+    "Pick": 141,
+    "Weight": 0.0532
+  },
+  {
+    "Pick": 142,
+    "Weight": 0.052
+  },
+  {
+    "Pick": 143,
+    "Weight": 0.0498
+  },
+  {
+    "Pick": 144,
+    "Weight": 0.0487
+  },
+  {
+    "Pick": 145,
+    "Weight": 0.0476
+  },
+  {
+    "Pick": 146,
+    "Weight": 0.0465
+  },
+  {
+    "Pick": 147,
+    "Weight": 0.0454
+  },
+  {
+    "Pick": 148,
+    "Weight": 0.0432
+  },
+  {
+    "Pick": 149,
+    "Weight": 0.0421
+  },
+  {
+    "Pick": 150,
+    "Weight": 0.041
+  },
+  {
+    "Pick": 151,
+    "Weight": 0.0399
+  },
+  {
+    "Pick": 152,
+    "Weight": 0.0388
+  },
+  {
+    "Pick": 153,
+    "Weight": 0.0377
+  },
+  {
+    "Pick": 154,
+    "Weight": 0.0365
+  },
+  {
+    "Pick": 155,
+    "Weight": 0.0343
+  },
+  {
+    "Pick": 156,
+    "Weight": 0.0332
+  },
+  {
+    "Pick": 157,
+    "Weight": 0.0321
+  },
+  {
+    "Pick": 158,
+    "Weight": 0.031
+  },
+  {
+    "Pick": 159,
+    "Weight": 0.0299
+  },
+  {
+    "Pick": 160,
+    "Weight": 0.0288
+  },
+  {
+    "Pick": 161,
+    "Weight": 0.0277
+  },
+  {
+    "Pick": 162,
+    "Weight": 0.0266
+  },
+  {
+    "Pick": 163,
+    "Weight": 0.0255
+  },
+  {
+    "Pick": 164,
+    "Weight": 0.0244
+  },
+  {
+    "Pick": 165,
+    "Weight": 0.0233
+  },
+  {
+    "Pick": 166,
+    "Weight": 0.0221
+  },
+  {
+    "Pick": 167,
+    "Weight": 0.021
+  },
+  {
+    "Pick": 168,
+    "Weight": 0.0199
+  },
+  {
+    "Pick": 169,
+    "Weight": 0.0188
+  },
+  {
+    "Pick": 170,
+    "Weight": 0.0177
+  },
+  {
+    "Pick": 171,
+    "Weight": 0.0155
+  },
+  {
+    "Pick": 172,
+    "Weight": 0.0144
+  },
+  {
+    "Pick": 173,
+    "Weight": 0.0133
+  },
+  {
+    "Pick": 174,
+    "Weight": 0.0122
+  },
+  {
+    "Pick": 175,
+    "Weight": 0.0111
+  },
+  {
+    "Pick": 176,
+    "Weight": 0.0111
+  },
+  {
+    "Pick": 177,
+    "Weight": 0.01
+  },
+  {
+    "Pick": 178,
+    "Weight": 0.0089
+  },
+  {
+    "Pick": 179,
+    "Weight": 0.0078
+  },
+  {
+    "Pick": 180,
+    "Weight": 0.0066
+  }
+]
