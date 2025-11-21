@@ -329,11 +329,17 @@
     function gradeFromPickStrength(ps) {
       if (ps == null || Number.isNaN(ps)) return null;
 
-      if (ps >= 1.25) return "A+";
-      if (ps >= 1.15) return "A";
-      if (ps >= 1.05) return "B";
-      if (ps >= 0.95) return "C";
-      if (ps >= 0.85) return "D";
+      if (ps >= 1.6932) return "A+";
+      if (ps >= 1.4946) return "A";
+      if (ps >= 1.3953) return "A-";
+      if (ps >= 1.1967) return "B+";
+      if (ps >= 1.0974) return "B";
+      if (ps >= 0.9981) return "B-";
+      if (ps >= 0.8989) return "C+";
+      if (ps >= 0.7996) return "C";
+      if (ps >= 0.6009) return "C-";
+      if (ps >= 0.5017) return "D+";
+      if (ps >= 0.3031) return "D";
       return "F";
     }
 
