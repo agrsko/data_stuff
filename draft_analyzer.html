@@ -201,7 +201,7 @@
     // ------------------ GLOBAL DATA ------------------
 
     let players = [];      // from players_2024.json
-    let pickWeights = {};  // from pick_values.json
+    let pickWeights = {};  // from pick_weights.json
     let minPick = null;
     let maxPick = null;
 
@@ -282,7 +282,7 @@
     // ------------------ PICK VALUE LOADING ------------------
 
     function loadPickValues() {
-      return fetch("pick_values.json")
+      return fetch("pick_weights.json")
         .then(res => res.json())
         .then(data => {
           pickWeights = {};
@@ -305,7 +305,7 @@
           });
         })
         .catch(err => {
-          console.error("Error loading pick_values.json", err);
+          console.error("Error loading pick_weights.json", err);
         });
     }
 
